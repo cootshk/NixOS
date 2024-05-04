@@ -5,7 +5,7 @@
 }: {
   home-manager.users.${username} = {config, ...}: {
     home.file.".config/hypr/wallpaper.png" = {
-      source = ../wallpapers/aurora_borealis.png;
+      #source = ../wallpapers/aurora_borealis.png;
     };
 
     dconf.settings = {
