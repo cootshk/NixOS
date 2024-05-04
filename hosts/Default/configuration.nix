@@ -10,6 +10,8 @@
     ../../modules/hardware/nvidia.nix
     ../../modules/hardware/opengl.nix
     ../../modules/desktop/hyprland # Enable Hyprland window manager
+    #Plasma 6
+    #../../modules/desktop/plasma6.nix
     #../../modules/programs/games
     ./hardware-configuration.nix
   ];
@@ -68,12 +70,12 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "gb";
+    layout = "us";
     variant = "";
   };
 
   # Configure console keymap
-  console.keyMap = "uk";
+  console.keyMap = "us";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -90,7 +92,11 @@
   };
 
   environment.systemPackages = with pkgs; [
+    gnupg
+    pinentry-all
   ];
+
+  hardware.bluetooth.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

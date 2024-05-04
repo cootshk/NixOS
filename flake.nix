@@ -26,10 +26,10 @@
 
   outputs = {nixpkgs, ...} @ inputs: let
 
-    username = "harvey"; # REPLACE THIS WITH YOUR USERNAME!!! (if manually installing, this is Required.)
+    username = "hkaz0"; # REPLACE THIS WITH YOUR USERNAME!!! (if manually installing, this is Required.)
     system = "x86_64-linux"; # REPLACE THIS WITH YOUR ARCHITECTURE (Rarely need to)
-    locale = "en_GB.UTF-8"; # REPLACE THIS WITH YOUR LOCALE
-    timezone = "Europe/London"; # REPLACE THIS WITH YOUR TIMEZONE
+    locale = "en_US.UTF-8"; # REPLACE THIS WITH YOUR LOCALE
+    timezone = "America/Chicago"; # REPLACE THIS WITH YOUR TIMEZONE
 
     lib = nixpkgs.lib;
   in {
@@ -66,7 +66,7 @@
         inherit system;
         specialArgs =
           {
-            username = "harvey";
+            username = "hkaz0";
             inherit inputs;
           }
           // inputs;

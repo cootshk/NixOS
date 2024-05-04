@@ -11,8 +11,9 @@
     enable = true;
     extraCompatPackages = [pkgs.proton-ge-bin];
   };
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "steam"
-    ];
+  #nixpkgs.config.allowUnfreePredicate = pkg:
+  #  builtins.elem (lib.getName pkg) [
+  #    "steam"
+  #  ];
+  nixpkgs.config.allowUnfreePredicate = true;
 }

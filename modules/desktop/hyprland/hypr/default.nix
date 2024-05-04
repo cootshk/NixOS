@@ -74,10 +74,11 @@
         }
 
         # Monitor
-        monitor=HDMI-A-2,1920x1080@60.0,1920x0,1.0
+        #monitor=HDMI-A-2,1920x1080@60.0,1920x0,1.0
         # monitor=HDMI-A-2,disable
-        monitor=HDMI-A-1,1920x1080@60.0,0x0,1.0
-
+        #monitor=HDMI-A-1,1920x1080@60.0,0x0,1.0
+        monitor=DP-2, 1920x1080@60, 1920x0, 1
+        monitor=HDMI-A-1, 1920x1080@239.76, 0x0, 1.0 
         # Autostart
         exec-once = pamixer --set-volume 40
         #exec-once = [workspace 1 silent] firefox
@@ -106,8 +107,8 @@
 
         # Input config
         input {
-            kb_layout = gb,gb,de,fr
-            kb_variant = extd,dvorak,,
+            kb_layout = us,gb,gb,de,fr
+            kb_variant = ,extd,dvorak,,
             repeat_delay = 212
             repeat_rate = 30
             kb_model =

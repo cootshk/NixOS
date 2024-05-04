@@ -14,6 +14,7 @@
     ../modules/programs/direnv
     ../modules/programs/firefox
     # ../modules/programs/firefox/firefox-system.nix
+    ../modules/programs/flatpak
     ../modules/programs/kitty
     ../modules/programs/lazygit
     ../modules/programs/lf
@@ -23,6 +24,7 @@
     ../modules/services/tlp # Set cpu power settings
     ../modules/programs/tmux
     ../modules/programs/vscodium
+    ../modules/programs/steam
     ../modules/programs/spicetify
     ../modules/programs/zsh
   ];
@@ -38,6 +40,7 @@
       # Terminal
       eza
       fzf
+      fastfetch
       fd
       git
       gh
@@ -48,6 +51,7 @@
       nix-prefetch-scripts
       neofetch
       ripgrep
+      prismlauncher
       tldr
       unzip
     ];
@@ -72,6 +76,7 @@
         efiSupport = true;
         useOSProber = true;
         gfxmodeEfi = "1920x1080";
+        configurationLimit = 5;
         theme = pkgs.stdenv.mkDerivation {
           pname = "distro-grub-themes";
           version = "3.1";
@@ -90,6 +95,31 @@
   security = {
     polkit.enable = true;
     #sudo.wheelNeedsPassword = false;
+    sudo = {
+      enable = true;
+      extraRules = [{
+        commands = [
+          {
+            command = "${pkgs.systemd}/bin/systemctl suspend";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "${pkgs.systemd}/bin/reboot";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "${pkgs.systemd}/bin/poweroff";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+        groups = [ "wheel" ];
+      }];
+      extraConfig = with pkgs; ''
+        Defaults:picloud secure_path="${lib.makeBinPath [
+          systemd
+        ]}:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
+      '';
+    };
   };
 
   xdg.portal.enable = true;
@@ -98,8 +128,13 @@
   # Enable dconf for home-manager
   programs.dconf.enable = true;
 
+  # Plasma 6
+  services.desktopManager.plasma6.enable = true;
+
+
   # Enable sddm login manager
   services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
   services.displayManager.sddm.theme = "astronaut";
   services.displayManager.sddm.settings.Theme.CursorTheme = "Bibata-Modern-Classic";
 
@@ -145,10 +180,10 @@
   services.xserver.libinput.enable = true;
 
   # Default user when using: sudo nixos-rebuild build-vm
-  users.users.nixosvmtest.isNormalUser = true;
-  users.users.nixosvmtest.initialPassword = "vm";
-  users.users.nixosvmtest.group = "nixosvmtest";
-  users.groups.nixosvmtest = {};
+  #users.users.nixosvmtest.isNormalUser = true;
+  #users.users.nixosvmtest.initialPassword = "vm";
+  #users.users.nixosvmtest.group = "nixosvmtest";
+  #users.groups.nixosvmtest = {};
 
   # Default shell
   programs.zsh.enable = true;

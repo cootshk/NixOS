@@ -156,6 +156,8 @@
           nix-shell --run "x86_64-w64-mingw32-cmake -B build-mingw"
           nix-shell --run "make -C build-mingw"
         }
+
+        fastfetch
       '';
       envExtra = ''
               # Defaults
