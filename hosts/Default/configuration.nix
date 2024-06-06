@@ -10,6 +10,7 @@
     ../../modules/hardware/nvidia.nix
     ../../modules/hardware/opengl.nix
     ../../modules/desktop/hyprland # Enable Hyprland window manager
+    ../../modules/desktop/plasma
     #Plasma 6
     #../../modules/desktop/plasma6.nix
     #../../modules/programs/games
@@ -88,15 +89,30 @@
       "wheel"
       "video"
       "audio"
+      "docker"
     ];
   };
 
   environment.systemPackages = with pkgs; [
     gnupg
     pinentry-all
+    wget
+    gnumake
+    xdotool
+    vim
+    xorg.xwininfo
+    yad
+    steamtinkerlaunch
+    blockbench
+    qemu
+    quickemu
   ];
 
   hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
+  # Xbox controller
+  hardware.xpadneo.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

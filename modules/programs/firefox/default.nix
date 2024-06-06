@@ -26,10 +26,10 @@ in {
             */
             ExtensionSettings = {
               "*".installation_mode = "normal_installed"; # blocks all addons except the ones specified below
-              #"uBlock0@raymondhill.net" = {
-              #  install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-              #  installation_mode = "force_installed";
-              #};
+              "uBlock0@raymondhill.net" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+                installation_mode = "force_installed";
+              };
               "addon@darkreader.org" = {
                 install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
                 installation_mode = "force_installed";
@@ -50,6 +50,22 @@ in {
                 install_url = "https://github.com/mkaply/queryamoid/releases/download/v0.1/query_amo_addon_id-0.1-fx.xpi";
                 installation_mode = "force_installed";
               };
+              # Sponsorblock
+              "dev@ajay.app" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/latest.xpi";
+                installation_mode = "force_installed";
+              };
+              # Dearrow
+              "dearrow@ajay.app" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/dearrow/latest.xpi";
+                installation_mode = "force_installed";
+              };
+              # Return YouTube Dislike
+              "selivano.d@gmail.com" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislike/latest.xpi";
+                installation_mode = "force_installed";
+              };
+
               # add extensions here...
             };
 
@@ -58,6 +74,9 @@ in {
             */
             # Set preferences shared by all profiles.
             Preferences = {
+              # File picker
+              "widget.use-xdg-desktop-portal.file-picker" = 1;
+
               # Performance settings
               "gfx.webrender.all" = true; # Force enable GPU acceleration
               "media.ffmpeg.vaapi.enabled" = true;
@@ -185,6 +204,9 @@ in {
               "extensions.webcompat.perform_ua_overrides" = true;
             };
           };
+          #override = {
+          #  pipewireSupport = true;
+          #};
         };
 
         /*

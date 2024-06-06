@@ -120,7 +120,7 @@
   };
 
   xdg.portal.enable = true;
-  xdg.portal.configPackages = [pkgs.xdg-desktop-portal-gtk];
+  xdg.portal.configPackages = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland];
 
   # Enable dconf for home-manager
   programs.dconf.enable = true;

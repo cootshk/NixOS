@@ -7,7 +7,7 @@
   imports = [
     ../common.nix
     ../../modules/desktop/hyprland # Enable Hyprland window manager
-    ../../modules/desktop/gnome # Enable Gnome desktop environment
+    # ../../modules/desktop/gnome # Enable Gnome desktop environment
     ../../modules/programs/games/gamemode.nix
     ../../modules/programs/games/steam.nix
     ./hardware-configuration.nix

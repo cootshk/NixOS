@@ -12,6 +12,7 @@ currentUser=$(logname)
 # Delete dirs that conflict with home-manager
 rm -f ~/.mozilla/firefox/profiles.ini
 rm -rf ~/.gtkrc-*
+rm -f ~/.gtkrc-2.0
 rm -rf ~/.config/gtk-*
 rm -rf ~/.config/cava
 
@@ -30,4 +31,4 @@ nix-shell --command "sudo -u $currentUser git -C $scriptdir add *"
 
 clear
 nix-shell --command "echo BUILDING! | figlet -cklnoW | lolcat -F 0.3 -p 2.5 -S 300"
-nix-shell --command "sudo nixos-rebuild switch --flake $scriptdir#nixos --show-trace && rm -rf $backupdir"
+nix-shell --command "sudo nixos-rebuild switch --flake $scriptdir#nixos --show-trace $1 && rm -rf $backupdir"
