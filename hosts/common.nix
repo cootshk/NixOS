@@ -144,8 +144,9 @@
   # Enable sddm login manager
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.theme = "astronaut";
+  services.displayManager.sddm.settings.Theme.CursorTheme = "Bibata-Modern-Classic";
   #services.displayManager.sddm.theme = "catppuccin-mocha";
-  #services.displayManager.sddm.settings.Theme.CursorTheme = "Bibata-Modern-Classic";
 
   # Setup auth agent and keyring
   services.gnome.gnome-keyring.enable = true;
@@ -218,15 +219,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; let
-  #  sddm-themes = pkgs.callPackage ../modules/themes/sddm/themes.nix {};
+    sddm-themes = pkgs.callPackage ../modules/themes/sddm/themes.nix {};
     scripts = pkgs.callPackage ../modules/scripts {};
   in [
     # System
     scripts.tmux-sessionizer
     scripts.collect-garbage
-    #sddm-themes.sugar-dark
-    #sddm-themes.astronaut
-    #sddm-themes.tokyo-night
+    sddm-themes.sugar-dark
+    sddm-themes.astronaut
+    sddm-themes.tokyo-night
     adwaita-qt
     bibata-cursors
     libsForQt5.qt5.qtgraphicaleffects # For sddm to function properly
@@ -241,11 +242,11 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 

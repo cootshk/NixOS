@@ -6,7 +6,6 @@
 }: {
   imports = [
     ../../../themes/Catppuccin # Catppuccin GTK and QT themes
-    ../../../themes/wallpapers # Wallpapers
   ];
 
   programs.hyprland = {
