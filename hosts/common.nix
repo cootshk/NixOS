@@ -144,7 +144,7 @@
   # Enable sddm login manager
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
-  #services.displayManager.sddm.theme = "astronaut";
+  #services.displayManager.sddm.theme = "catppuccin-mocha";
   #services.displayManager.sddm.settings.Theme.CursorTheme = "Bibata-Modern-Classic";
 
   # Setup auth agent and keyring

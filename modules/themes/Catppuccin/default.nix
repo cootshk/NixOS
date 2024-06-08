@@ -5,7 +5,7 @@
 }: {
   home-manager.users.${username} = {config, ...}: {
     home.file.".config/hypr/wallpaper.png" = {
-      # source = ../wallpapers/escape_velocity.jpg;
+      source = ../wallpapers/escape_velocity.jpg;
       # source = ../wallpapers/aurora_borealis.png;
       #source = ../wallpapers/moon.png;
     };
@@ -37,7 +37,7 @@
           accents = ["mauve"];
           size = "compact";
           #tweaks = [ "rimless" "black" ];
-          variant = "macchiato";
+          variant = "mocha";
         };
       };
 

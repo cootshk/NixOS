@@ -106,6 +106,12 @@
     blockbench
     qemu
     quickemu
+    catppuccin
+    catppuccin-gtk
+    catppuccin-kde
+    #catppuccin-sddm
+    catppuccin-cursors
+    kdePackages.sddm-kcm
   ];
 
   hardware.bluetooth.enable = true;
