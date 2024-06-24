@@ -28,6 +28,7 @@
     ../modules/programs/vscodium
     ../modules/programs/steam
     ../modules/programs/spicetify
+    ../modules/programs/waydroid
     ../modules/programs/zsh
   ];
 
