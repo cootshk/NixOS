@@ -1,7 +1,7 @@
 {pkgs, ...} : {
   virtualisation.waydroid.enable = true;
 
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     wl-clipboard
   ];
 }
