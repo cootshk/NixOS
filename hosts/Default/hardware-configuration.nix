@@ -29,13 +29,7 @@
       options = ["nofail" "uid=1000" "gid=100" "dmask=007" "fmask=117" "user" "u+rwx" "g+rwx" "o+rwx" "users" "a+rwx" "exec" "umask=000"];
     };
 
-  fileSystems."/mnt/c" = 
-    { device = "/dev/disk/by-uuid/6EA4E657A4E62177";
-      fsType = "ntfs-3g";
-      options = ["nofail" "uid=1000" "gid=100" "dmask=007" "fmask=117" "user" "u+rwx" "g+rwx" "o+rwx" "users" "a+rwx" "exec" "umask=000"];
-    };
-  
-  swapDevices = [ "/dev/disk/by-uuid/d2d2d0a0-0108-4b80-95a1-25c903e9ffe5" ];
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
