@@ -611,7 +611,8 @@
 
           "custom/power" = {
             "format" = "{}";
-            "on-click" = "~/.config/hypr/scripts/Wlogout.sh";
+            #"on-click" = "~/.config/hypr/scripts/Wlogout.sh";
+            "on-click" = "wlogout";
             "interval" = 86400; # once every day
             "tooltip" = true;
           };
