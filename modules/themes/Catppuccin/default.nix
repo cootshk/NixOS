@@ -4,8 +4,13 @@
   ...
 }: {
   home-manager.users.${username} = {config, ...}: {
-    home.file.".config/hypr/wallpaper.png" = {
+    home.file.".config/hypr/wallpaper-right.png" = {
       source = ../wallpapers/escape_velocity.jpg;
+      # source = ../wallpapers/aurora_borealis.png;
+      #source = ../wallpapers/moon.png;
+    };
+    home.file.".config/hypr/wallpaper-left.gif" = {
+      source = ../wallpapers/celeste.gif;
       # source = ../wallpapers/aurora_borealis.png;
       #source = ../wallpapers/moon.png;
     };
