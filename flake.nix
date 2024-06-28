@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    catppuccin.url = "github:catppuccin/nix";
     nur.url = "github:nix-community/NUR";
     nixvim.url = "github:Sly-Harvey/nixvim";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -24,61 +25,28 @@
     };
   };
 
-  outputs = {nixpkgs, ...} @ inputs: let
+  outputs = {self, nixpkgs, catppuccin, ...} @ inputs: let
 
     username = "hkaz0"; # REPLACE THIS WITH YOUR USERNAME!!! (if manually installing, this is Required.)
     system = "x86_64-linux"; # REPLACE THIS WITH YOUR ARCHITECTURE (Rarely need to)
     locale = "en_US.UTF-8"; # REPLACE THIS WITH YOUR LOCALE
     timezone = "America/Chicago"; # REPLACE THIS WITH YOUR TIMEZONE
 
+    modules = [
+      inputs.home-manager.nixosModules.home-manager
+      # catppuccin.nixosModules.catppuccin
+    ];
+
     lib = nixpkgs.lib;
   in {
     nixosConfigurations = {
-      # This is the only config you will have to change (Desktop and Laptop are for my personal use and may not work for you)
       nixos = lib.nixosSystem {
         inherit system;
         specialArgs = {inherit username locale timezone inputs;} // inputs;
         modules = [
           ./hosts/Default/configuration.nix
-        ];
-      };
-      Desktop = lib.nixosSystem {
-        inherit system;
-        specialArgs = let
-          hostname = "NixOS-Desktop";
-        in
-          {inherit username hostname inputs;} // inputs;
-        modules = [
-          ./hosts/Desktop/configuration.nix
-        ];
-      };
-      Laptop = lib.nixosSystem {
-        inherit system;
-        specialArgs = let
-          hostname = "NixOS-Laptop";
-        in
-          {inherit username hostname inputs;} // inputs;
-        modules = [
-          ./hosts/Laptop/configuration.nix
-        ];
-      };
-      iso = lib.nixosSystem {
-        inherit system;
-        specialArgs =
-          {
-            username = "hkaz0";
-            inherit inputs;
-          }
-          // inputs;
-        modules = [
-          ./hosts/ISO/configuration.nix
-        ];
-      };
-      Test = lib.nixosSystem {
-        inherit system;
-        specialArgs = {inherit username locale timezone inputs;} // inputs;
-        modules = [
-          ./hosts/Test/configuration.nix
+          #catppuccin.homeManagerModules.catppuccin
+          catppuccin.nixosModules.catppuccin
         ];
       };
     };

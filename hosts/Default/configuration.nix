@@ -3,6 +3,7 @@
   username,
   locale,
   timezone,
+  inputs,
   ...
 }: {
   imports = [
@@ -19,6 +20,7 @@
 
   # Home-manager config
   home-manager.users.${username} = {
+    imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
     home.username = username;
     home.homeDirectory = "/home/${username}";
 
@@ -106,12 +108,12 @@
     blockbench
     qemu
     quickemu
-    catppuccin
-    catppuccin-gtk
-    catppuccin-kde
+    #catppuccin
+    #catppuccin-gtk
+    #catppuccin-kde
     #catppuccin-sddm
-    catppuccin-cursors
-    kdePackages.sddm-kcm
+    #catppuccin-cursors
+    #kdePackages.sddm-kcm
   ];
 
   hardware.bluetooth.enable = true;

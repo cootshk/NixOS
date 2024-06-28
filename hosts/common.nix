@@ -2,10 +2,14 @@
   inputs,
   pkgs,
   username,
+  lib,
   ...
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    # inputs.catppuccin.nixosModules.catppuccin
+    # inputs.catppuccin.homeManagerModules.catppuccin
+
     ../modules/hardware/opengl.nix
     ../modules/programs/alacritty
     ../modules/programs/bash
@@ -32,8 +36,15 @@
     ../modules/programs/zsh
   ];
 
+  catppuccin = {
+    enable = true;
+    accent = "teal";
+    flavor = "mocha";
+  };
+
   # Common home-manager options that are shared between all systems.
-  home-manager.users.${username} = {pkgs, ...}: {
+  home-manager.users.${username} = {pkgs, inputs, ...}: {
+#     imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
     # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
     home.packages = with pkgs; [
       # Applications
@@ -144,13 +155,6 @@
   #services.desktopManager.plasma6.enable = true;
 
 
-  # Enable sddm login manager
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.sddm.theme = "astronaut";
-  services.displayManager.sddm.settings.Theme.CursorTheme = "Bibata-Modern-Classic";
-  #services.displayManager.sddm.theme = "catppuccin-mocha";
-
   # Setup auth agent and keyring
   services.gnome.gnome-keyring.enable = true;
   systemd = {
@@ -222,15 +226,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; let
-    sddm-themes = pkgs.callPackage ../modules/themes/sddm/themes.nix {};
+    # sddm-themes = pkgs.callPackage ../modules/themes/sddm/themes.nix {};
     scripts = pkgs.callPackage ../modules/scripts {};
   in [
     # System
-    scripts.tmux-sessionizer
+    scripts.tm
+    x-sessionizer
     scripts.collect-garbage
-    sddm-themes.sugar-dark
-    sddm-themes.astronaut
-    sddm-themes.tokyo-night
     adwaita-qt
     bibata-cursors
     libsForQt5.qt5.qtgraphicaleffects # For sddm to function properly
@@ -241,7 +243,27 @@
     devbox # faster nix-shells
     shellify # faster nix-shells
     github-desktop
+    /*
+    (pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      font = "Noto Sans";
+      fontSize = "9";
+      background = "${../../modules/themes/wallpapers/wallhaven-8586my.png}";
+      loginBackground = true;
+    })
+    */
   ];
+
+  # Enable sddm login manager
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  # theme = "astronaut";
+  # settings.Theme.CursorTheme = "Bibata-Modern-Classic";
+    # package = lib.mkForce pkgs.kdePackages.sddm;
+  #  theme = "catppuccin-mocha";
+    # catppuccin.enable = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

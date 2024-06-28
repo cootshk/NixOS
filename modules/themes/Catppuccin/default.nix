@@ -3,7 +3,18 @@
   pkgs,
   ...
 }: {
-  home-manager.users.${username} = {config, ...}: {
+  catppuccin.flavor = "mocha";
+  environment.systemPackages = with pkgs; [
+    libsForQt5.qt5ct
+    kdePackages.qt6ct
+    libsForQt5.qtstyleplugin-kvantum
+  ];
+  environment.sessionVariables = {
+    QT_STYLE_OVERRIDE = "Catppuccin-Mocha";
+  };
+
+  home-manager.users.${username} = {config, pkgs, ...}: {
+    # imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
     home.file.".config/hypr/wallpaper-right.png" = {
       source = ../wallpapers/escape_velocity.jpg;
       # source = ../wallpapers/aurora_borealis.png;
@@ -28,16 +39,32 @@
       name = "Bibata-Modern-Classic";
       size = 24;
     };
-
+  /*
+    catppuccin = {
+      accent = "teal";
+      enable = true;
+      flavor = "mocha";
+    };
+  */
     qt = {
       enable = true;
-      platformTheme.name = "gtk"; # gnome
+      platformTheme.name = "kvantum";
+      style.name = "kvantum";
+      
+      style.catppuccin = {
+        accent = "teal";
+        enable = true;
+        flavor = "mocha";
+      };
+      
     };
+
 
     gtk = {
       enable = true;
+#       catppuccin.enable = true;
       theme = {
-        name = "Catppuccin-Macchiato-Compact-Mauve-Dark";
+        name = "Catppuccin-Mocha-Compact-Mauve-Dark";
         package = pkgs.catppuccin-gtk.override {
           accents = ["mauve"];
           size = "compact";
