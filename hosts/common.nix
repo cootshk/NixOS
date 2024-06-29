@@ -93,7 +93,7 @@
         useOSProber = true;
         gfxmodeEfi = "1920x1080";
         configurationLimit = 5;
-        theme = pkgs.stdenv.mkDerivation {
+        theme = lib.mkForce (pkgs.stdenv.mkDerivation {
           pname = "distro-grub-themes";
           version = "3.1";
           src = pkgs.fetchFromGitHub {
@@ -103,7 +103,7 @@
             hash = "sha256-ZcoGbbOMDDwjLhsvs77C7G7vINQnprdfI37a9ccrmPs=";
           };
           installPhase = "cp -r customize/nixos $out";
-        };
+        });
       };
     };
   };
@@ -194,7 +194,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Default user when using: sudo nixos-rebuild build-vm
   #users.users.nixosvmtest.isNormalUser = true;
@@ -225,14 +225,11 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; let
-    # sddm-themes = pkgs.callPackage ../modules/themes/sddm/themes.nix {};
-    scripts = pkgs.callPackage ../modules/scripts {};
-  in [
+  environment.systemPackages = with pkgs; [
     # System
-    scripts.tm
-    x-sessionizer
-    scripts.collect-garbage
+    # scripts.tm
+    # x-sessionizer
+    # scripts.collect-garbage
     adwaita-qt
     bibata-cursors
     libsForQt5.qt5.qtgraphicaleffects # For sddm to function properly
