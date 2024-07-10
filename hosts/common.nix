@@ -249,6 +249,12 @@
       loginBackground = true;
     })
     */
+    # Kde Settings
+    pciutils
+    wayland-utils
+    clinfo
+    glxinfo
+    vulkan-tools
   ];
 
   # Enable sddm login manager
