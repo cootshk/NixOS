@@ -255,6 +255,13 @@
     clinfo
     glxinfo
     vulkan-tools
+
+    # VMs
+    qemu_full
+    qemu_kvm
+    libvirt
+    virt-manager
+
   ];
 
   # Enable sddm login manager
