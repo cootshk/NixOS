@@ -52,7 +52,7 @@
     wayland.windowManager.hyprland = {
       enable = true;
       plugins = [
-        inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+      #  inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
       ];
       systemd = {
         enable = true;
@@ -322,7 +322,7 @@
         bind = $mainMod, F10, exec, pkill wlsunset
 
         # Overview plugin
-        bind = $mainMod, tab, overview:toggle
+        # bind = $mainMod, tab, overview:toggle
 
         # Window/Session actions
         bind = $mainMod, Q, exec, ~/.config/hypr/scripts/dontkillsteam.sh # killactive, kill the window on focus

@@ -15,13 +15,15 @@
       # ref = "v0.40.0";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    /*
     Hyprspace = {
       type = "git";
       url = "https://github.com/KZDKM/Hyprspace";
       submodules = true;
       inputs.hyprland.follows = "hyprland";
-      rev = "cbdac93d2a2b2cb70933a8f6a51ae7511de35615";
+      # rev = "cbdac93d2a2b2cb70933a8f6a51ae7511de35615";
     };
+    */
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

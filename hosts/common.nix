@@ -41,7 +41,7 @@
     accent = "teal";
     flavor = "mocha";
   };
-
+  home-manager.backupFileExtension = ".old";
   # Common home-manager options that are shared between all systems.
   home-manager.users.${username} = {pkgs, inputs, ...}: {
 #     imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
@@ -82,6 +82,7 @@
   # Bootloader.
   boot = {
     tmp.cleanOnBoot = true;
+    kernelParams = [ "intel_iommu=on" ];
     loader = {
       efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/boot";
@@ -262,7 +263,13 @@
     libvirt
     virt-manager
 
+    # Wine
+    (wineWowPackages.stable.override { waylandSupport = true; })
   ];
+
+  #virtualisation.libvirtd.enable = true;
+  #virtualisation.spiceUSBRedirection.enable = true;
+  #programs.virt-manager.enable = true;
 
   # Enable sddm login manager
   services.displayManager.sddm = {

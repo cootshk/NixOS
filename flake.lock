@@ -1,28 +1,5 @@
 {
   "nodes": {
-    "Hyprspace": {
-      "inputs": {
-        "hyprland": [
-          "hyprland"
-        ]
-      },
-      "locked": {
-        "lastModified": 1714135626,
-        "narHash": "sha256-ATUzRiHEA91Fqdpf/MfUQifxJuT4kT6YRWgxbOOzCzw=",
-        "ref": "refs/heads/main",
-        "rev": "cbdac93d2a2b2cb70933a8f6a51ae7511de35615",
-        "revCount": 120,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/KZDKM/Hyprspace"
-      },
-      "original": {
-        "rev": "cbdac93d2a2b2cb70933a8f6a51ae7511de35615",
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/KZDKM/Hyprspace"
-      }
-    },
     "catppuccin": {
       "locked": {
         "lastModified": 1719592953,
@@ -619,7 +596,6 @@
     },
     "root": {
       "inputs": {
-        "Hyprspace": "Hyprspace",
         "catppuccin": "catppuccin",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",

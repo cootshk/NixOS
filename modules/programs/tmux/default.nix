@@ -62,7 +62,7 @@ in {
         bind C-a send-prefix
 
         # Options
-        set -g @catppuccin_flavour 'macchiato'
+        set -g @catppuccin_flavour 'mocha'
         set -g mouse on
         set -g allow-rename off
         set -g status-position top
