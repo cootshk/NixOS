@@ -269,6 +269,7 @@
 
     # Wallpaper Engine
     inputs.kostek001-pkgs.packages.${pkgs.system}.wallpaper-engine-kde-plugin
+    kdePackages.qtwebchannel
   ];
 
   #virtualisation.libvirtd.enable = true;
