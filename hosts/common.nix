@@ -7,6 +7,7 @@
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    # inputs.kostek001-pkgs.nixosModules.wallpaper-engine-kde-plugin
     # inputs.catppuccin.nixosModules.catppuccin
     # inputs.catppuccin.homeManagerModules.catppuccin
 
@@ -265,6 +266,9 @@
 
     # Wine
     (wineWowPackages.stable.override { waylandSupport = true; })
+
+    # Wallpaper Engine
+    inputs.kostek001-pkgs.packages.${pkgs.system}.wallpaper-engine-kde-plugin
   ];
 
   #virtualisation.libvirtd.enable = true;
