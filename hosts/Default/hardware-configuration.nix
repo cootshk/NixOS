@@ -40,4 +40,8 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # Nvidia graphics drivers
+  environment.systemPackages = with pkgs; [
+    linuxKernel.packages.linux_6_6.nvidia_x11
+  ];
 }
