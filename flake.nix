@@ -38,10 +38,10 @@
     };
     # Wallpaper Engine
     kostek001-pkgs = {
-    url = "github:kostek001/pkgs";
-    # Only if using nixpkgs-unstable
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
+      url = "github:kostek001/pkgs";
+      # Only if using nixpkgs-unstable
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {self, nixpkgs, catppuccin, ...} @ inputs: let
