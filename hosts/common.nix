@@ -42,7 +42,7 @@
     accent = "teal";
     flavor = "mocha";
   };
-  home-manager.backupFileExtension = ".old";
+  home-manager.backupFileExtension = "old";
   # Common home-manager options that are shared between all systems.
   home-manager.users.${username} = {pkgs, inputs, ...}: {
 #     imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
