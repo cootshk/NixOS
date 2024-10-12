@@ -28,6 +28,11 @@
       fsType = "ntfs-3g";
       options = ["nofail" "uid=1000" "gid=100" "dmask=007" "fmask=117" "user" "u+rwx" "g+rwx" "o+rwx" "users" "a+rwx" "exec" "umask=000"];
     };
+  fileSystems."/mnt/c" =
+    { device = "/dev/disk/by-uuid/6EA4E657A4E62177";
+      fsType = "ntfs-3g";
+      options = ["nofail" "uid=1000" "gid=100" "dmask=007" "fmask=117" "user" "u+rwx" "g+rwx" "o+rwx" "users" "a+rwx" "exec" "umask=000"];
+    };
 
   swapDevices = [ ];
 
