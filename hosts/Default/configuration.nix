@@ -6,6 +6,8 @@
   inputs,
   ...
 }: {
+  nixpkgs.config.allowUnfree = true;
+  
   imports = [
     ../common.nix
     ../../modules/hardware/nvidia.nix
@@ -17,6 +19,7 @@
     #../../modules/programs/games
     ./hardware-configuration.nix
   ];
+
 
   # Home-manager config
   home-manager.users.${username} = {
