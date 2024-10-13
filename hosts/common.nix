@@ -281,6 +281,9 @@
     # Wallpaper Engine
     inputs.kostek001-pkgs.packages.${pkgs.system}.wallpaper-engine-kde-plugin
     kdePackages.qtwebchannel
+
+    # Icons
+    morewaita-icon-theme
   ];
 
   #virtualisation.libvirtd.enable = true;
