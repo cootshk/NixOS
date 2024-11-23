@@ -30,8 +30,8 @@
     };
   fileSystems."/mnt/c" =
     { device = "/dev/disk/by-uuid/a3d31b70-c6be-43ee-a470-7a77d471ed45";
-      fsType = "ext4";
-      options = ["nofail" "uid=1000" "gid=100" "user"];
+      fsType = "auto";
+      # options = ["nofail" "uid=1000" "gid=100" "user"];
       # options = ["nofail" "uid=1000" "gid=100" "dmask=007" "fmask=117" "user" "u+rwx" "g+rwx" "o+rwx" "users" "a+rwx" "exec" "umask=000"];
     };
 
