@@ -16,6 +16,7 @@ rm -f ~/.mozilla/firefox/profiles.ini
 rm -rf ~/.gtkrc-*
 rm -rf ~/.config/gtk-*
 rm -rf ~/.config/cava
+rm -rf ~/.*.old
 
 # replace user variable in flake.nix with $USER
 sed -i -e 's/username = \".*\"/username = \"'$currentUser'\"/' $scriptdir/flake.nix
