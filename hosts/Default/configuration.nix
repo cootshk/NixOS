@@ -47,6 +47,12 @@
   };
 
   networking.hostName = "nixos"; # Define your hostname.
+  networking.enableIPv6 = true; # IPv6 Support
+  networking.nameservers = [
+    "1.1.1.1"
+    "192.168.100.1"
+    "1.0.0.1"
+  ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
