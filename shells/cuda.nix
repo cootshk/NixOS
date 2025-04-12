@@ -3,6 +3,7 @@
 (pkgs.buildFHSUserEnv {
   name = "cuda-env";
   targetPkgs = pkgs: with pkgs; [ 
+    gcc12
     git
     gitRepo
     gnupg
@@ -24,13 +25,17 @@
     binutils
     ollama
     nvidia-docker
+#    gcc12
   ];
   multiPkgs = pkgs: with pkgs; [ zlib ];
-  runScript = "bash";
+  runScript = "bash -c \'if [[ -z \"$NIX_LOGFILE\" ]]; then export NIX_LOG_FILE=\"/dev/stdout\"; fi; if [[ -z \"$NIX_AUTOSTART\" ]]; then export NIX_AUTOSTART=\"bash\"; fi; $NIX_AUTOSTART >> $NIX_LOGFILE\'";
   profile = ''
     export CUDA_PATH=${pkgs.cudatoolkit}
     # export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
     export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
     export EXTRA_CCFLAGS="-I/usr/include"
   '';
+  #shellHook = ''
+  #~/ollama serve
+  #'';
 }).env
