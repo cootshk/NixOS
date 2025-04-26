@@ -33,6 +33,7 @@ sed -i -e 's/username = \".*\"/username = \"'$currentUser'\"/' $scriptdir/flake.
 
 nix-shell --command "sudo -u $currentUser git -C $scriptdir add *"
 rm -f ~/.gtkrc-2.0
+sync
 clear
 nix-shell --command "echo BUILDING! | figlet -cklnoW | lolcat -F 0.3 -p 2.5 -S 300"
 NIXPKGS_ALLOW_UNFREE=1 nix-shell --command "NIXPKGS_ALLOW_UNFREE=1 sudo nixos-rebuild switch --flake $scriptdir#nixos --show-trace $1 --impure && rm -rf $backupdir"

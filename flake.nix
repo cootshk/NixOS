@@ -42,9 +42,14 @@
       # Only if using nixpkgs-unstable
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # sops
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {self, nixpkgs, catppuccin, ...} @ inputs: let
+  outputs = {self, nixpkgs, catppuccin, sops-nix, ...} @ inputs: let
 
     username = "hkaz0"; # REPLACE THIS WITH YOUR USERNAME!!! (if manually installing, this is Required.)
     system = "x86_64-linux"; # REPLACE THIS WITH YOUR ARCHITECTURE (Rarely need to)
@@ -66,6 +71,7 @@
           ./hosts/Default/configuration.nix
           #catppuccin.homeManagerModules.catppuccin
           catppuccin.nixosModules.catppuccin
+          sops-nix.nixosModules.sops
         ];
       };
     };

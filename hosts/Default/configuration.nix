@@ -106,6 +106,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    age
     gnupg
     pinentry-all
     wget

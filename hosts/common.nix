@@ -16,6 +16,7 @@
     ../modules/programs/bash
     ../modules/programs/btop
     ../modules/programs/cava
+    ../modules/programs/cloudflared
     ../modules/programs/direnv
     ../modules/programs/docker
     #../modules/programs/fastfetch
@@ -288,7 +289,7 @@
     morewaita-icon-theme
     
     # Cloudflare
-    cloudflare-warp cloudflared
+    cloudflare-warp # cloudflared - moved to module
   ];
 
   # virtualisation.libvirtd.enable = true;

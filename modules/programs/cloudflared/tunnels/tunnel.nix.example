@@ -1,0 +1,11 @@
+{
+  config,
+  pkgs,
+  ...
+}: {
+    # https://github.com/NixOS/nixpkgs/pull/171875/commits/c770b44aff6e7eb7e19c64e4442fe2332af9d7b4#L176
+  services.cloudflared.tunnels."00000000-0000-0000-0000-000000000000" = {
+    credentialsFile = "${config.sops.secrets.cloudflared-creds.path}";
+    default = "http_status:404";
+  };
+}
