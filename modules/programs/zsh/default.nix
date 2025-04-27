@@ -259,7 +259,8 @@
         media = "cd /mnt/seagate/media/";
         games = "cd /mnt/games/";
 
-
+        # Other programs
+        ollama = "~/ollama";
         fastfetch = "if [[ \"$TERM\" == \"xterm-kitty\" ]]; then fastfetch --kitty-direct /home/hkaz0/NixOS/assets/nixos-logo.png; else; fastfetch; fi";
       };
     };
