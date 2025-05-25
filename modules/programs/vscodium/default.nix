@@ -5,7 +5,7 @@
   home-manager.users.${username} = _: {
     programs.vscode = {
       enable = true;
-      package = pkgs.vscode;
+      package = pkgs.vscode-fhs;
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
         #jnoortheen.nix-ide
@@ -28,6 +28,7 @@
         # pkief.material-icon-theme
         # equinusocio.vsc-material-theme
         # dracula-theme.theme-dracula
+        sumneko.lua
       ];
       keybindings = [
         {
@@ -106,6 +107,9 @@
         "C_Cpp.doxygen.generatedStyle" = "/**";
 
         "git.enableSmartCommit" = true;
+        "git.confirmSync" = false;
+        "files.autoSave" = "onFocusChange";
+        # "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
     };
   };
