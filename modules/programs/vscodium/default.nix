@@ -2,6 +2,10 @@
 , pkgs
 , ...
 }: {
+  environment.systemPackages = with pkgs; [
+    # vscodium
+    lua-language-server
+  ];
   home-manager.users.${username} = _: {
     programs.vscode = {
       enable = true;
@@ -109,6 +113,9 @@
         "git.enableSmartCommit" = true;
         "git.confirmSync" = false;
         "files.autoSave" = "onFocusChange";
+        "[Lua]" = {
+          "editor.formatOnPaste" = false;
+        };
         # "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
     };
