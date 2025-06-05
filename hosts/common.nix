@@ -150,12 +150,22 @@
 
   xdg.portal = {
     enable = true;
-    configPackages = [pkgs.xdg-desktop-portal-gtk]; # pkgs.xdg-desktop-portal-hyprland];
-    extraPortals = with pkgs; [
+    configPackages = with pkgs; [
+      xdg-desktop-portal
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
+      kdePackages.xdg-desktop-portal-kde
+      xdg-desktop-portal-hyprland
+    ];
+    extraPortals = with pkgs; [
+      # xdg-desktop-portal
+      # xdg-desktop-portal-wlr
+      # xdg-desktop-portal-gtk
+      # kdePackages.xdg-desktop-portal-kde
+      xdg-desktop-portal-termfilechooser
       # xdg-desktop-portal-hyprland
     ];
+    xdgOpenUsePortal = true;
   };
 
   # Enable dconf for home-manager
@@ -240,7 +250,7 @@
   };
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
     # System
     # scripts.tm
