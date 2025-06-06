@@ -217,12 +217,8 @@
   users.defaultUserShell = pkgs.zsh;
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override {
-      fonts = [
-        "JetBrainsMono"
-        "FiraCode"
-      ];
-    })
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
   ];
 
 

@@ -5,12 +5,7 @@
 }: {
   home-manager.users.${username} = _: {
     home.packages = with pkgs; [
-      (nerdfonts.override {
-        fonts = [
-          "JetBrainsMono"
-          # "FiraCode"
-        ];
-      })
+      nerd-fonts.jetbrains-mono
     ];
 
     programs.alacritty = {
