@@ -39,23 +39,28 @@
       name = "Bibata-Modern-Classic";
       size = 24;
     };
-  /*
     catppuccin = {
-      accent = "teal";
-      enable = true;
-      flavor = "mocha";
+      kvantum = {
+        enable = true;
+        # package = pkgs.catppuccin-kvantum.override {
+          flavor = "mocha";
+          accent = "teal";
+        # };
+      };
+      # accent = "teal";
+      # enable = true;
+      # flavor = "mocha";
     };
-  */
     qt = {
       enable = true;
       platformTheme.name = "kvantum";
       style.name = "kvantum";
       
-      style.catppuccin = {
-        accent = "teal";
-        enable = true;
-        flavor = "mocha";
-      };
+      # style.catppuccin = {
+      #   accent = "teal";
+      #   enable = true;
+      #   flavor = "mocha";
+      # };
       
     };
 
@@ -74,7 +79,7 @@
       };
 
       iconTheme = {
-        package = pkgs.gnome.adwaita-icon-theme;
+        package = pkgs.adwaita-icon-theme;
         name = "Adwaita";
         #name = "Yaru-magenta-dark";
         #package = pkgs.yaru-theme;

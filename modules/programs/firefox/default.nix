@@ -267,7 +267,7 @@ in {
             ];
             search = {
               force = true;
-              default = "DuckDuckGo";
+              default = "ddg";
               privateDefault = "Startpage";
               order = [
                 "Startpage"
@@ -276,7 +276,7 @@ in {
                 "NixOS Wiki"
                 "Home Manager Options"
                 "Searx"
-                "Google"
+                "google"
               ];
               engines = {
                 "Startpage" = {
@@ -328,7 +328,7 @@ in {
                 };
                 "NixOS Wiki" = {
                   urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
-                  iconUpdateURL = "https://nixos.wiki/favicon.png";
+                  icon = "https://nixos.wiki/favicon.png";
                   updateInterval = 24 * 60 * 60 * 1000; # every day
                   definedAliases = ["@nw"];
                 };
@@ -345,19 +345,19 @@ in {
                   #     ];
                   #   }
                   # ];
-                  iconUpdateURL = "https://avatars.githubusercontent.com/u/33221035";
+                  icon = "https://avatars.githubusercontent.com/u/33221035";
                   updateInterval = 24 * 60 * 60 * 1000; # Update every day.
                   definedAliases = ["@hm"];
                 };
                 "Searx" = {
                   urls = [{template = "https://searx.aicampground.com/?q={searchTerms}";}];
-                  iconUpdateURL = "https://nixos.wiki/favicon.png";
+                  icon = "https://nixos.wiki/favicon.png";
                   updateInterval = 24 * 60 * 60 * 1000; # every day
                   definedAliases = ["@sx"];
                 };
-                "Bing".metaData.hidden = true;
+                "bing".metaData.hidden = true;
                 "Ebay".metaData.hidden = true;
-                "Google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
+                "google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
               };
             };
             extraConfig = ''

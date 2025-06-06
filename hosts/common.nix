@@ -197,8 +197,8 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  # sound.enable = true; 
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -227,12 +227,14 @@
   users.defaultUserShell = pkgs.zsh;
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override {
-      fonts = [
-        "JetBrainsMono"
-        "FiraCode"
-      ];
-    })
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    # (nerdfonts.override {
+    #   fonts = [
+    #     "JetBrainsMono"
+    #     "FiraCode"
+    #   ];
+    # })
   ];
 
 
@@ -245,7 +247,7 @@
       "nvtopPackages.full"
     ];
     overlays = [
-      inputs.nur.overlay
+      inputs.nur.overlays.default
     ];
   };
 
@@ -372,7 +374,7 @@
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
         "neorocks.cachix.org-1:WqMESxmVTOJX7qoBC54TwrMMoVI1xAM+7yFin8NRfwk="
       ];
-      experimental-features = ["nix-command" "flakes" "repl-flake"];
+      experimental-features = ["nix-command" "flakes" ]; #"repl-flake"];
       use-xdg-base-directories = true;
       warn-dirty = false;
       keep-outputs = true;
@@ -385,6 +387,6 @@
       options = "--delete-older-than 3d";
     };
     optimise.automatic = true;
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
   };
 }
