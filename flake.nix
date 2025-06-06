@@ -2,7 +2,7 @@
   description = "A simple flake for an atomic system";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     catppuccin.url = "github:catppuccin/nix";
     nur.url = "github:nix-community/NUR";
     nixvim.url = "github:Sly-Harvey/nixvim";

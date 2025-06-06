@@ -38,11 +38,11 @@
     ../modules/programs/zsh
   ];
 
-  catppuccin = {
-    enable = true;
-    accent = "teal";
-    flavor = "mocha";
-  };
+  # catppuccin = {
+  #   enable = true;
+  #   accent = "teal";
+  #   flavor = "mocha";
+  # };
   home-manager.backupFileExtension = "old";
   # Common home-manager options that are shared between all systems.
   home-manager.users.${username} = {pkgs, inputs, ...}: {
@@ -187,7 +187,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  # sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -362,7 +362,7 @@
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
         "neorocks.cachix.org-1:WqMESxmVTOJX7qoBC54TwrMMoVI1xAM+7yFin8NRfwk="
       ];
-      experimental-features = ["nix-command" "flakes" "repl-flake"];
+      experimental-features = ["nix-command" "flakes"];
       use-xdg-base-directories = true;
       warn-dirty = false;
       keep-outputs = true;
@@ -375,6 +375,6 @@
       options = "--delete-older-than 3d";
     };
     optimise.automatic = true;
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
   };
 }
