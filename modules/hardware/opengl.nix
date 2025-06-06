@@ -1,8 +1,8 @@
 {pkgs, ...}: {
-  hardware.graphics = {
+  hardware.opengl = {
     enable = true;
     # driSupport = true;
-    enable32Bit = true;
+    # enable32Bit = true;
     extraPackages = with pkgs; [
       vulkan-loader
       vulkan-validation-layers

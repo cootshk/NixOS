@@ -24,7 +24,7 @@
         persistencedSha256 = "sha256-E2J2wYYyRu7Kc3MMZz/8ZIemcZg68rkzvqEwFAL3fFs=";
       };
     };
-    graphics = {
+    opengl = {
       extraPackages = with pkgs; [nvidia-vaapi-driver];
     };
   };
