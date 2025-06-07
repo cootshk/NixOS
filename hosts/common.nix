@@ -1,10 +1,4 @@
-{
-  inputs,
-  pkgs,
-  username,
-  lib,
-  ...
-}: {
+{ inputs, pkgs, username, lib, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     # inputs.kostek001-pkgs.nixosModules.wallpaper-engine-kde-plugin
@@ -45,8 +39,8 @@
   # };
   home-manager.backupFileExtension = "old";
   # Common home-manager options that are shared between all systems.
-  home-manager.users.${username} = {pkgs, inputs, ...}: {
-#     imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+  home-manager.users.${username} = { pkgs, inputs, ... }: {
+    #     imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
     # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
     home.packages = with pkgs; [
       # Applications
@@ -68,6 +62,7 @@
       jq
       lf
       #lolcat
+      nixfmt
       nix-prefetch-scripts
       neofetch
       # nvtop
@@ -83,7 +78,7 @@
   };
 
   # Filesystems support
-  boot.supportedFilesystems = ["ntfs" "exfat" "ext4" "fat32" "btrfs"];
+  boot.supportedFilesystems = [ "ntfs" "exfat" "ext4" "fat32" "btrfs" ];
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
@@ -141,16 +136,17 @@
         groups = [ "wheel" ];
       }];
       extraConfig = with pkgs; ''
-        Defaults:picloud secure_path="${lib.makeBinPath [
-          systemd
-        ]}:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
+        Defaults:picloud secure_path="${
+          lib.makeBinPath [ systemd ]
+        }:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
       '';
     };
   };
 
   xdg.portal = {
     enable = true;
-    configPackages = [pkgs.xdg-desktop-portal-gtk]; # pkgs.xdg-desktop-portal-hyprland];
+    configPackages =
+      [ pkgs.xdg-desktop-portal-gtk ]; # pkgs.xdg-desktop-portal-hyprland];
     extraPortals = with pkgs; [
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
@@ -164,18 +160,18 @@
   # Plasma 6
   #services.desktopManager.plasma6.enable = true;
 
-
   # Setup auth agent and keyring
   services.gnome.gnome-keyring.enable = true;
   systemd = {
     user.services.polkit-kde-authentication-agent-1 = {
       description = "polkit-kde-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+        ExecStart =
+          "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
@@ -216,23 +212,23 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
+  fonts.fontDir.enable = true;
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
-  ];
-
+    # ...
+  ]; # ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   nixpkgs = {
-    config.allowUnfree = true; #sometimes this doesn't work
+    config.allowUnfree = true; # sometimes this doesn't work
     # config.allowUnfreePredicate = _: true;
-    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "cuda-merged"
-      "nvtop"
-      "nvtopPackages.full"
-    ];
-    overlays = [
-      inputs.nur.overlays.default
-    ];
+    config.allowUnfreePredicate = pkg:
+      builtins.elem (lib.getName pkg) [
+        "cuda-merged"
+        "nvtop"
+        "nvtopPackages.full"
+      ];
+    overlays = [ inputs.nur.overlays.default ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -252,14 +248,13 @@
     devbox # faster nix-shells
     shellify # faster nix-shells
     github-desktop
-    /*
-    (pkgs.catppuccin-sddm.override {
-      flavor = "mocha";
-      font = "Noto Sans";
-      fontSize = "9";
-      background = "${../../modules/themes/wallpapers/wallhaven-8586my.png}";
-      loginBackground = true;
-    })
+    /* (pkgs.catppuccin-sddm.override {
+         flavor = "mocha";
+         font = "Noto Sans";
+         fontSize = "9";
+         background = "${../../modules/themes/wallpapers/wallhaven-8586my.png}";
+         loginBackground = true;
+       })
     */
     # Kde Settings
     pciutils
@@ -283,7 +278,7 @@
 
     # Icons
     morewaita-icon-theme
-    
+
     # Cloudflare
     cloudflare-warp # cloudflared - moved to module
   ];
@@ -297,10 +292,12 @@
       swtpm.enable = true;
       ovmf = {
         enable = true;
-        packages = [(pkgs.OVMF.override {
-          secureBoot = true;
-          tpmSupport = true;
-        }).fd];
+        packages = [
+          (pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd
+        ];
       };
     };
   };
@@ -312,10 +309,10 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-  # theme = "astronaut";
-  # settings.Theme.CursorTheme = "Bibata-Modern-Classic";
+    # theme = "astronaut";
+    # settings.Theme.CursorTheme = "Bibata-Modern-Classic";
     # package = lib.mkForce pkgs.kdePackages.sddm;
-  #  theme = "catppuccin-mocha";
+    #  theme = "catppuccin-mocha";
     # catppuccin.enable = true;
   };
 
@@ -358,7 +355,7 @@
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
         "neorocks.cachix.org-1:WqMESxmVTOJX7qoBC54TwrMMoVI1xAM+7yFin8NRfwk="
       ];
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [ "nix-command" "flakes" ];
       use-xdg-base-directories = true;
       warn-dirty = false;
       keep-outputs = true;

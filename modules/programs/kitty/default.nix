@@ -1,17 +1,13 @@
-{
-  pkgs,
-  lib,
-  username,
-  ...
-}: {
+{ pkgs, lib, username, ... }: {
   home-manager.users.${username} = _: {
     programs.kitty = {
       enable = true;
       font = {
-        name = "JetBrainsMono Nerd Font";
-        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono";
+        # package = pkgs.nerdfonts;
         size = 11.0;
       };
+      enableGitIntegration = true;
       themeFile = "Catppuccin-Mocha";
       settings = {
         confirm_os_window_close = 0;

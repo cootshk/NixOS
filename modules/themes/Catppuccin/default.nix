@@ -39,13 +39,11 @@
       name = "Bibata-Modern-Classic";
       size = 24;
     };
-  /*
-    catppuccin = {
+    catppuccin.kvantum = {
       accent = "teal";
       enable = true;
       flavor = "mocha";
     };
-  */
     qt = {
       enable = true;
       platformTheme.name = "kvantum";
