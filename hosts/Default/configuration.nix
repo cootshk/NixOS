@@ -23,7 +23,7 @@
 
   # Home-manager config
   home-manager.users.${username} = {
-    imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+    imports = [ inputs.catppuccin.homeModules.catppuccin ];
     home.username = username;
     home.homeDirectory = "/home/${username}";
 
