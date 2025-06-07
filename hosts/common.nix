@@ -32,11 +32,11 @@
     ../modules/programs/zsh
   ];
 
-  # catppuccin = {
-  #   enable = true;
-  #   accent = "teal";
-  #   flavor = "mocha";
-  # };
+  catppuccin = {
+    enable = true;
+    accent = "teal";
+    flavor = "mocha";
+  };
   home-manager.backupFileExtension = "old";
   # Common home-manager options that are shared between all systems.
   home-manager.users.${username} = { pkgs, inputs, ... }: {

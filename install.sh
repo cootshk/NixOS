@@ -12,12 +12,12 @@ scriptdir=$(realpath $(dirname $0))
 currentUser=$(logname)
 
 # Delete dirs that conflict with home-manager
-rm -f ~/.mozilla/firefox/profiles.ini
-rm -rf ~/.gtkrc-*
-rm -rf ~/.config/gtk-*
-rm -rf ~/.config/cava
-rm -rf ~/*.old
-rm -rf ~/.*.old
+rm -f  /home/$currentUser/.mozilla/firefox/profiles.ini
+rm -rf /home/$currentUser/.gtkrc-*
+rm -rf /home/$currentUser/.config/gtk-*
+rm -rf /home/$currentUser/.config/cava
+rm -rf /home/$currentUser/*.old
+rm -rf /home/$currentUser/.*.old
 sync # make sure that ~/.gtkrc-2.0.old is deleted
 
 # replace user variable in flake.nix with $USER
@@ -32,10 +32,10 @@ sed -i -e 's/username = \".*\"/username = \"'$currentUser'\"/' $scriptdir/flake.
 # fi
 
 nix-shell --command "sudo -u $currentUser git -C $scriptdir add *"
-rm -f ~/.gtkrc-2.0
-rm -f ~/.gtkrc-2.0.old
+rm -f /home/$currentUser/.gtkrc-2.0
+rm -f /home/$currentUser/.gtkrc-2.0.old
 sync
 clear
 nix-shell --command "echo BUILDING! | figlet -cklnoW | lolcat -F 0.3 -p 2.5 -S 300"
-NIXPKGS_ALLOW_UNFREE=1 nix-shell --command "NIXPKGS_ALLOW_UNFREE=1 sudo nixos-rebuild switch --flake $scriptdir#nixos --show-trace $1 --impure" # && rm -rf $backupdir"
+NIXPKGS_ALLOW_UNFREE=1 sudo -u $currentUser nix-shell --command "NIXPKGS_ALLOW_UNFREE=1 sudo nixos-rebuild switch --flake $scriptdir#nixos --show-trace --impure $@" # && rm -rf $backupdir"
 echo "$backupdir"
