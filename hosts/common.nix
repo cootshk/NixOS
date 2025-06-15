@@ -330,10 +330,54 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      # Minecraft
+      19132
+      25565
+      25575
+      # Satisfactory
+      7777
+      15000
+      15777
+      # HTTP(S)
+      80
+      443
+    ];
+    allowedTCPPortRanges = [
+      {
+        start = 3000;
+        end = 4000;
+      }
+      {
+        start = 5000;
+        end = 6000;
+      }
+      # HTTP
+      {
+        start = 8000;
+        end = 9000;
+      }
+    ];
+    allowedUDPPorts = [
+      1234
+      # Minecraft
+      19132
+      # Satisfactory
+      7777
+    ];
+    allowedUDPPortRanges = [
+      {
+        start = 3000;
+        end = 4000;
+      }
+      {
+        start = 5000;
+        end = 6000;
+      }
+    ];
+  };
 
   nix = {
     # Nix Package Manager Settings
