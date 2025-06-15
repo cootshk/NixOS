@@ -27,6 +27,24 @@
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
+
+    home.packages = with pkgs;
+      [
+        # Script aliases
+        (pkgs.writeShellScriptBin "pkg" ''
+          #!/usr/bin/env bash
+          if [[ -z "$1" ]]; then
+            nix shell
+          else
+            while [[ -n "$1" ]]; do
+              export _PKGS="$_PKGS nixpkgs#$1"
+              shift
+            done
+            nix shell ''${_PKGS: }
+          fi
+        '')
+
+      ];
   };
 
   networking.hostName = "nixos"; # Define your hostname.

@@ -9,6 +9,7 @@
     ../modules/programs/alacritty
     ../modules/programs/bash
     ../modules/programs/btop
+    ../modules/programs/cachix
     ../modules/programs/cava
     ../modules/programs/cloudflared
     ../modules/programs/direnv
@@ -302,8 +303,9 @@
     };
   };
 
-  virtualisation.spiceUSBRedirection.enable = true;
-  programs.virt-manager.enable = true;
+  # Turning on VMs massively slows down boot
+  virtualisation.spiceUSBRedirection.enable = false;
+  programs.virt-manager.enable = false;
 
   # Enable sddm login manager
   services.displayManager.sddm = {
