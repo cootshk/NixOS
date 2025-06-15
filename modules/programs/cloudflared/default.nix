@@ -1,16 +1,7 @@
-{
-  username,
-  pkgs,
-  config,
-  ...
-}: {
+{ username, pkgs, config, ... }: {
   imports = [
-    tunnels/henry.nix # fill these out on your own.
+    # tunnels/henry.nix # fill these out on your own.
   ];
-  environment.systemPackages = with pkgs; [
-    cloudflared
-  ];
-  services.cloudflared = {
-    enable = true;
-  };
+  environment.systemPackages = with pkgs; [ cloudflared ];
+  services.cloudflared = { enable = true; };
 }
