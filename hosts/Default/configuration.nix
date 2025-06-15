@@ -1,13 +1,6 @@
-{
-  pkgs,
-  username,
-  locale,
-  timezone,
-  inputs,
-  ...
-}: {
+{ pkgs, username, locale, timezone, inputs, ... }: {
   nixpkgs.config.allowUnfree = true;
-  
+
   imports = [
     ../common.nix
     ../../modules/hardware/nvidia.nix
@@ -20,7 +13,6 @@
     ./hardware-configuration.nix
   ];
 
-
   # Home-manager config
   home-manager.users.${username} = {
     imports = [ inputs.catppuccin.homeModules.catppuccin ];
@@ -28,15 +20,6 @@
     home.homeDirectory = "/home/${username}";
 
     home.stateVersion = "23.11"; # Please read the comment before changing.
-
-    home.packages = with pkgs; [
-      #vim
-      #krita
-      #steam
-      (pkgs.writeShellScriptBin "hello" ''
-        echo "Hello ''${username}!"
-      '')
-    ];
 
     home.sessionVariables = {
       # EDITOR = "emacs";
@@ -48,11 +31,7 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.enableIPv6 = true; # IPv6 Support
-  networking.nameservers = [
-    "1.1.1.1"
-    "192.168.100.1"
-    "1.0.0.1"
-  ];
+  networking.nameservers = [ "1.1.1.1" "192.168.100.1" "1.0.0.1" ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -95,14 +74,8 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "video"
-      "audio"
-      "docker"
-      "libvirtd"
-    ];
+    extraGroups =
+      [ "networkmanager" "wheel" "video" "audio" "docker" "libvirtd" ];
   };
 
   environment.systemPackages = with pkgs; [

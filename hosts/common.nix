@@ -347,17 +347,17 @@
     ];
     allowedTCPPortRanges = [
       {
-        start = 3000;
-        end = 4000;
+        from = 3000;
+        to = 4000;
       }
       {
-        start = 5000;
-        end = 6000;
+        from = 5000;
+        to = 6000;
       }
       # HTTP
       {
-        start = 8000;
-        end = 9000;
+        from = 8000;
+        to = 9000;
       }
     ];
     allowedUDPPorts = [
@@ -369,12 +369,12 @@
     ];
     allowedUDPPortRanges = [
       {
-        start = 3000;
-        end = 4000;
+        from = 3000;
+        to = 4000;
       }
       {
-        start = 5000;
-        end = 6000;
+        from = 5000;
+        to = 6000;
       }
     ];
   };
@@ -404,6 +404,7 @@
       warn-dirty = false;
       keep-outputs = true;
       keep-derivations = true;
+      trusted-users = [ "root" "${username}" ];
     };
     gc = {
       # Garbage Collection
