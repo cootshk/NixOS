@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Check if running as root. If not root, script will exit
-if [[ $EUID -ne 0 ]]; then
+# Check if running as root. If root, script will exit
+if [[ $EUID -eq 0 ]]; then
 	echo "This script should be executed as root! Exiting..."
 	exit 1
 fi
@@ -12,12 +12,12 @@ scriptdir=$(realpath $(dirname $0))
 currentUser=$(logname)
 
 # Delete dirs that conflict with home-manager
-rm -f  /home/$currentUser/.mozilla/firefox/profiles.ini
-rm -rf /home/$currentUser/.gtkrc-*
-rm -rf /home/$currentUser/.config/gtk-*
-rm -rf /home/$currentUser/.config/cava
-rm -rf /home/$currentUser/*.old
-rm -rf /home/$currentUser/.*.old
+rm -f  ~/.mozilla/firefox/profiles.ini
+rm -rf ~/.gtkrc-*
+rm -rf ~/.config/gtk-*
+rm -rf ~/.config/cava
+rm -rf ~/*.old
+rm -rf ~/.*.old
 sync # make sure that ~/.gtkrc-2.0.old is deleted
 
 # replace user variable in flake.nix with $USER
@@ -31,11 +31,8 @@ sed -i -e 's/username = \".*\"/username = \"'$currentUser'\"/' $scriptdir/flake.
 # 	nixos-generate-config --show-hardware-config >$scriptdir/hosts/Default/hardware-configuration.nix
 # fi
 
-nix-shell --command "sudo -u $currentUser git -C $scriptdir add *"
-rm -f /home/$currentUser/.gtkrc-2.0
-rm -f /home/$currentUser/.gtkrc-2.0.old
-sync
+nix-shell --command "git -C $scriptdir add *"
 clear
 nix-shell --command "echo BUILDING! | figlet -cklnoW | lolcat -F 0.3 -p 2.5 -S 300"
-NIXPKGS_ALLOW_UNFREE=1 sudo -u $currentUser nix-shell --command "NIXPKGS_ALLOW_UNFREE=1 sudo nixos-rebuild switch --flake $scriptdir#nixos --show-trace --impure $@" # && rm -rf $backupdir"
-echo "$backupdir"
+nix-shell --command "sudo nixos-rebuild switch --flake $scriptdir#nixos --show-trace $@" # && rm -rf $backupdir"
+# echo "$backupdir"
