@@ -47,13 +47,18 @@
     };
   };
 
-  outputs = { self, nixpkgs, catppuccin, sops-nix, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      catppuccin,
+      sops-nix,
+      ...
+    }@inputs:
     let
 
-      username =
-        "hkaz0"; # REPLACE THIS WITH YOUR USERNAME!!! (if manually installing, this is Required.)
-      system =
-        "x86_64-linux"; # REPLACE THIS WITH YOUR ARCHITECTURE (Rarely need to)
+      username = "hkaz0"; # REPLACE THIS WITH YOUR USERNAME!!! (if manually installing, this is Required.)
+      system = "x86_64-linux"; # REPLACE THIS WITH YOUR ARCHITECTURE (Rarely need to)
       locale = "en_US.UTF-8"; # REPLACE THIS WITH YOUR LOCALE
       timezone = "America/Chicago"; # REPLACE THIS WITH YOUR TIMEZONE
 
@@ -63,12 +68,30 @@
       ];
 
       lib = nixpkgs.lib;
-    in {
+    in
+    {
       nixosConfigurations = {
         nixos = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit username locale timezone inputs; } // inputs;
+          specialArgs = {
+            inherit
+              username
+              locale
+              timezone
+              inputs
+              ;
+          }
+          // inputs;
           modules = [
+            (
+              { pkgs, ... }:
+              {
+                nixpkgs.config = {
+                  allowUnfree = true;
+                  allowUnfreePredicate = pkg: true;
+                };
+              }
+            )
             ./hosts/Default/configuration.nix
             #catppuccin.homeManagerModules.catppuccin
             catppuccin.nixosModules.catppuccin

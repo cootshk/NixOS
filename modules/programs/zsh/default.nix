@@ -2,7 +2,8 @@
   username,
   pkgs,
   ...
-}: {
+}:
+{
   home-manager.users.${username} = _: {
     home.file.".config/zsh/.p10k.zsh" = {
       source = ./.p10k.zsh;
@@ -29,7 +30,12 @@
       oh-my-zsh = {
         # Plug-ins
         enable = true;
-        plugins = ["git" "gitignore" "aliases" "z"];
+        plugins = [
+          "git"
+          "gitignore"
+          "aliases"
+          "z"
+        ];
       };
       initContent = ''
         # Powerlevel10k Zsh theme
@@ -260,7 +266,6 @@
         games = "cd /mnt/games/";
 
         # Other programs
-        ollama = "~/ollama";
         fastfetch = "if [[ \"$TERM\" == \"xterm-kitty\" ]]; then fastfetch --kitty-direct /home/hkaz0/NixOS/assets/nixos-logo.png; else; fastfetch; fi";
       };
     };

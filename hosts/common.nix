@@ -1,4 +1,11 @@
-{ inputs, pkgs, username, lib, ... }: {
+{
+  inputs,
+  pkgs,
+  username,
+  lib,
+  ...
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
     # inputs.kostek001-pkgs.nixosModules.wallpaper-engine-kde-plugin
@@ -38,48 +45,58 @@
     accent = "teal";
     flavor = "mocha";
   };
+  home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "old";
   # Common home-manager options that are shared between all systems.
-  home-manager.users.${username} = { pkgs, inputs, ... }: {
-    #     imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
-    # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
-    home.packages = with pkgs; [
-      # Applications
-      #kate
-      xfce.thunar
+  home-manager.users.${username} =
+    { pkgs, inputs, ... }:
+    {
+      #     imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+      # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
+      home.packages = with pkgs; [
+        # Applications
+        #kate
+        xfce.thunar
 
-      # Terminal
-      appimage-run
-      # dolphin-emu
-      eza
-      fzf
-      fastfetch
-      fd
-      ffmpeg-full
-      fish
-      git
-      gh
-      htop
-      jq
-      lf
-      #lolcat
-      nixfmt
-      nix-prefetch-scripts
-      neofetch
-      # nvtop
-      #nvidia-docker
-      ripgrep
-      piper-tts
-      portaudio
-      prismlauncher
-      vlc
-      tldr
-      unzip
-    ];
-  };
+        # Terminal
+        appimage-run
+        # dolphin-emu
+        eza
+        fzf
+        fastfetch
+        fd
+        ffmpeg-full
+        fish
+        git
+        gh
+        htop
+        jq
+        lf
+        #lolcat
+        nixfmt
+        nix-prefetch-scripts
+        neofetch
+        # nvtop
+        #nvidia-docker
+        ollama-cuda
+        ripgrep
+        piper-tts
+        portaudio
+        prismlauncher
+        vlc
+        tldr
+        unzip
+      ];
+    };
 
   # Filesystems support
-  boot.supportedFilesystems = [ "ntfs" "exfat" "ext4" "fat32" "btrfs" ];
+  boot.supportedFilesystems = [
+    "ntfs"
+    "exfat"
+    "ext4"
+    "fat32"
+    "btrfs"
+  ];
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
@@ -99,17 +116,19 @@
         useOSProber = true;
         gfxmodeEfi = "1920x1080";
         configurationLimit = 5;
-        theme = lib.mkForce (pkgs.stdenv.mkDerivation {
-          pname = "distro-grub-themes";
-          version = "3.1";
-          src = pkgs.fetchFromGitHub {
-            owner = "AdisonCavani";
-            repo = "distro-grub-themes";
-            rev = "v3.1";
-            hash = "sha256-ZcoGbbOMDDwjLhsvs77C7G7vINQnprdfI37a9ccrmPs=";
-          };
-          installPhase = "cp -r customize/nixos $out";
-        });
+        theme = lib.mkForce (
+          pkgs.stdenv.mkDerivation {
+            pname = "distro-grub-themes";
+            version = "3.1";
+            src = pkgs.fetchFromGitHub {
+              owner = "AdisonCavani";
+              repo = "distro-grub-themes";
+              rev = "v3.1";
+              hash = "sha256-ZcoGbbOMDDwjLhsvs77C7G7vINQnprdfI37a9ccrmPs=";
+            };
+            installPhase = "cp -r customize/nixos $out";
+          }
+        );
       };
     };
   };
@@ -119,27 +138,27 @@
     #sudo.wheelNeedsPassword = false;
     sudo = {
       enable = true;
-      extraRules = [{
-        commands = [
-          {
-            command = "${pkgs.systemd}/bin/systemctl suspend";
-            options = [ "NOPASSWD" ];
-          }
-          {
-            command = "${pkgs.systemd}/bin/reboot";
-            options = [ "NOPASSWD" ];
-          }
-          {
-            command = "${pkgs.systemd}/bin/poweroff";
-            options = [ "NOPASSWD" ];
-          }
-        ];
-        groups = [ "wheel" ];
-      }];
+      extraRules = [
+        {
+          commands = [
+            {
+              command = "${pkgs.systemd}/bin/systemctl suspend";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "${pkgs.systemd}/bin/reboot";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "${pkgs.systemd}/bin/poweroff";
+              options = [ "NOPASSWD" ];
+            }
+          ];
+          groups = [ "wheel" ];
+        }
+      ];
       extraConfig = with pkgs; ''
-        Defaults:picloud secure_path="${
-          lib.makeBinPath [ systemd ]
-        }:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
+        Defaults:picloud secure_path="${lib.makeBinPath [ systemd ]}:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
       '';
     };
   };
@@ -149,12 +168,21 @@
     config = {
       common.default = [ "gtk" ];
       kde = {
-        default = [ "kde" "gtk" "gnome" ];
+        default = [
+          "kde"
+          "gtk"
+          "gnome"
+        ];
         "org.freedesktop.portal.FileChooser" = [ "kde" ];
         "org.freedesktop.portal.OpenURI" = [ "kde" ];
       };
       hyprland = {
-        default = [ "hyprland" "gtk" "gnome" "termfilechooser" ];
+        default = [
+          "hyprland"
+          "gtk"
+          "gnome"
+          "termfilechooser"
+        ];
         "org.freedesktop.portal.FileChooser" = [ "termfilechooser" ];
         "org.freedesktop.portal.OpenURI" = [ "termfilechooser" ];
       };
@@ -191,8 +219,7 @@
       after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart =
-          "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+        ExecStart = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
@@ -241,14 +268,6 @@
   ]; # ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   nixpkgs = {
-    config.allowUnfree = true; # sometimes this doesn't work
-    # config.allowUnfreePredicate = _: true;
-    config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [
-        "cuda-merged"
-        "nvtop"
-        "nvtopPackages.full"
-      ];
     overlays = [ inputs.nur.overlays.default ];
   };
 
@@ -269,13 +288,14 @@
     devbox # faster nix-shells
     shellify # faster nix-shells
     github-desktop
-    /* (pkgs.catppuccin-sddm.override {
-         flavor = "mocha";
-         font = "Noto Sans";
-         fontSize = "9";
-         background = "${../../modules/themes/wallpapers/wallhaven-8586my.png}";
-         loginBackground = true;
-       })
+    /*
+      (pkgs.catppuccin-sddm.override {
+        flavor = "mocha";
+        font = "Noto Sans";
+        fontSize = "9";
+        background = "${../../modules/themes/wallpapers/wallhaven-8586my.png}";
+        loginBackground = true;
+      })
     */
     # Kde Settings
     pciutils
@@ -352,55 +372,70 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      # Minecraft
-      19132
-      25565
-      25575
-      # Satisfactory
-      7777
-      15000
-      15777
-      # HTTP(S)
-      80
-      443
+  networking = {
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        # Minecraft
+        19132
+        25565
+        25575
+        # Satisfactory
+        7777
+        15000
+        15777
+        # HTTP(S)
+        80
+        443
+      ];
+      allowedTCPPortRanges = [
+        {
+          from = 3000;
+          to = 4000;
+        }
+        {
+          from = 5000;
+          to = 6000;
+        }
+        # HTTP
+        {
+          from = 8000;
+          to = 9000;
+        }
+      ];
+      allowedUDPPorts = [
+        1234
+        # Minecraft
+        19132
+        # Satisfactory
+        7777
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 3000;
+          to = 4000;
+        }
+        {
+          from = 5000;
+          to = 6000;
+        }
+      ];
+    };
+    hostName = "nixos"; # Define your hostname.
+    enableIPv6 = true; # IPv6 Support
+    nameservers = [
+      "1.1.1.1"
+      "192.168.100.1"
+      "1.0.0.1"
     ];
-    allowedTCPPortRanges = [
-      {
-        from = 3000;
-        to = 4000;
-      }
-      {
-        from = 5000;
-        to = 6000;
-      }
-      # HTTP
-      {
-        from = 8000;
-        to = 9000;
-      }
-    ];
-    allowedUDPPorts = [
-      1234
-      # Minecraft
-      19132
-      # Satisfactory
-      7777
-    ];
-    allowedUDPPortRanges = [
-      {
-        from = 3000;
-        to = 4000;
-      }
-      {
-        from = 5000;
-        to = 6000;
-      }
-    ];
+    networkmanager.enable = true;
+    # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+    # (the default) this is the recommended approach. When using systemd-networkd it's
+    # still possible to use this option, but it's recommended to use it in conjunction
+    # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+    useDHCP = lib.mkDefault true;
+    # interfaces.enp5s0.useDHCP = lib.mkDefault true;
   };
-
   nix = {
     # Nix Package Manager Settings
     settings = {
@@ -412,6 +447,7 @@
         "https://nix-gaming.cachix.org"
         "https://cuda-maintainers.cachix.org"
         "https://neorocks.cachix.org"
+        "https://cootshk.cachix.org"
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -420,13 +456,20 @@
         "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
         "neorocks.cachix.org-1:WqMESxmVTOJX7qoBC54TwrMMoVI1xAM+7yFin8NRfwk="
+        "cootshk.cachix.org-1:yt4kcEbYvyd1Xs/H2Uw7VNOl1EjAiTdef/ZjyQY09CU="
       ];
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       use-xdg-base-directories = true;
       warn-dirty = false;
       keep-outputs = true;
       keep-derivations = true;
-      trusted-users = [ "root" "${username}" ];
+      trusted-users = [
+        "root"
+        "${username}"
+      ];
     };
     gc = {
       # Garbage Collection

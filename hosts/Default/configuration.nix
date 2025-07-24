@@ -1,6 +1,12 @@
-{ pkgs, username, locale, timezone, inputs, ... }: {
-  nixpkgs.config.allowUnfree = true;
-
+{
+  pkgs,
+  username,
+  locale,
+  timezone,
+  inputs,
+  ...
+}:
+{
   imports = [
     ../common.nix
     ../../modules/hardware/nvidia.nix
@@ -28,36 +34,23 @@
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 
-    home.packages = with pkgs;
-      [
-        # Script aliases
-        (pkgs.writeShellScriptBin "pkg" ''
-          #!/usr/bin/env bash
-          if [[ -z "$1" ]]; then
-            nix shell
-          else
-            while [[ -n "$1" ]]; do
-              export _PKGS="$_PKGS nixpkgs#$1"
-              shift
-            done
-            NIXPKGS_ALLOW_UNFREE=1 nix shell --impure ''${_PKGS: }
-          fi
-        '')
+    home.packages = with pkgs; [
+      # Script aliases
+      (pkgs.writeShellScriptBin "pkg" ''
+        #!/usr/bin/env bash
+        if [[ -z "$1" ]]; then
+          nix shell
+        else
+          while [[ -n "$1" ]]; do
+            export _PKGS="$_PKGS nixpkgs#$1"
+            shift
+          done
+          NIXPKGS_ALLOW_UNFREE=1 nix shell --impure ''${_PKGS: }
+        fi
+      '')
 
-      ];
+    ];
   };
-
-  networking.hostName = "nixos"; # Define your hostname.
-  networking.enableIPv6 = true; # IPv6 Support
-  networking.nameservers = [ "1.1.1.1" "192.168.100.1" "1.0.0.1" ];
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Timezone and locale
   time.timeZone = timezone;
@@ -92,8 +85,14 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups =
-      [ "networkmanager" "wheel" "video" "audio" "docker" "libvirtd" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "audio"
+      "docker"
+      "libvirtd"
+    ];
   };
 
   environment.systemPackages = with pkgs; [
