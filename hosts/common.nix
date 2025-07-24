@@ -146,13 +146,33 @@
 
   xdg.portal = {
     enable = true;
-    configPackages =
-      [ pkgs.xdg-desktop-portal-gtk ]; # pkgs.xdg-desktop-portal-hyprland];
+    config = {
+      common.default = [ "gtk" ];
+      kde = {
+        default = [ "kde" "gtk" "gnome" ];
+        "org.freedesktop.portal.FileChooser" = [ "kde" ];
+        "org.freedesktop.portal.OpenURI" = [ "kde" ];
+      };
+      hyprland = {
+        default = [ "hyprland" "gtk" "gnome" "termfilechooser" ];
+        "org.freedesktop.portal.FileChooser" = [ "termfilechooser" ];
+        "org.freedesktop.portal.OpenURI" = [ "termfilechooser" ];
+      };
+    };
+    wlr.enable = true;
+    configPackages = with pkgs; [
+      # xdg-desktop-portal
+      kdePackages.xdg-desktop-portal-kde
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+    ];
     extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
       # xdg-desktop-portal-hyprland
+      xdg-desktop-portal-termfilechooser
     ];
+    # make xdg-open use a portal
+    xdgOpenUsePortal = true;
   };
 
   # Enable dconf for home-manager
