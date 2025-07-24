@@ -40,7 +40,7 @@
               export _PKGS="$_PKGS nixpkgs#$1"
               shift
             done
-            nix shell ''${_PKGS: }
+            NIXPKGS_ALLOW_UNFREE=1 nix shell --impure ''${_PKGS: }
           fi
         '')
 

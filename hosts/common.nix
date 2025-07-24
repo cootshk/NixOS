@@ -285,10 +285,10 @@
     vulkan-tools
 
     # VMs
-    qemu_full
-    qemu_kvm
-    libvirt
-    virt-manager
+    # qemu_full
+    # qemu_kvm
+    # libvirt
+    # virt-manager
 
     # Wine
     (wineWowPackages.stable.override { waylandSupport = true; })
@@ -306,7 +306,7 @@
 
   # virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd = {
-    enable = true;
+    enable = false;
     qemu = {
       package = pkgs.qemu_kvm;
       runAsRoot = true;

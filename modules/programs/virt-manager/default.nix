@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  imports = [./hooks.nix];
+{ pkgs, ... }: {
+  imports = [ ./hooks.nix ];
 
   # packages
   environment.systemPackages = with pkgs; [
@@ -14,17 +14,17 @@
   # virtualisation
   virtualisation = {
     libvirtd = {
-      enable = true;
+      enable = false;
       qemu = {
         swtpm.enable = true;
         ovmf.enable = true;
-        ovmf.packages = [pkgs.OVMFFull.fd];
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
       };
     };
 
-    spiceUSBRedirection.enable = true;
+    spiceUSBRedirection.enable = false;
   };
 
   # virt-manager
-  programs.virt-manager.enable = true;
+  programs.virt-manager.enable = false;
 }
