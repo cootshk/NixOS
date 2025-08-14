@@ -2,7 +2,8 @@
   pkgs,
   username,
   ...
-}: {
+}:
+{
   home-manager.users.${username} = _: {
     home.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
@@ -79,21 +80,25 @@
           class.instance = "Alacritty";
         };
 
-        shell = {
+        terminal.shell = {
           program = "${pkgs.zsh}/bin/zsh";
         };
 
         keyboard.bindings = [
-          /* {
-            chars = "cd $(find /mnt/seagate/dev/ ~/.config/ /usr/ ~/.local/ ~/ -mindepth 1 -maxdepth 2 | fzf)\r";
-            key = "F";
-            mods = "Control";
-          } */
-          /* {
-            chars = "lf\r";
-            key = "L";
-            mods = "Control|Alt";
-          } */
+          /*
+            {
+              chars = "cd $(find /mnt/seagate/dev/ ~/.config/ /usr/ ~/.local/ ~/ -mindepth 1 -maxdepth 2 | fzf)\r";
+              key = "F";
+              mods = "Control";
+            }
+          */
+          /*
+            {
+              chars = "lf\r";
+              key = "L";
+              mods = "Control|Alt";
+            }
+          */
           {
             chars = "tmux-sessionizer\r";
             key = "F";
