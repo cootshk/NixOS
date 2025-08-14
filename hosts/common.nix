@@ -165,42 +165,44 @@
 
   xdg.portal = {
     enable = true;
-    config = {
-      common.default = [ "gtk" ];
-      kde = {
-        default = [
-          "kde"
-          "gtk"
-          "gnome"
-        ];
-        "org.freedesktop.portal.FileChooser" = [ "kde" ];
-        "org.freedesktop.portal.OpenURI" = [ "kde" ];
-      };
-      hyprland = {
-        default = [
-          "hyprland"
-          "gtk"
-          "gnome"
-          "termfilechooser"
-        ];
-        "org.freedesktop.portal.FileChooser" = [ "termfilechooser" ];
-        "org.freedesktop.portal.OpenURI" = [ "termfilechooser" ];
-      };
-    };
+    # config = {
+    #   common.default = [ "*" ];
+    #   kde = {
+    #     default = [
+    #       "kde"
+    #       "gtk"
+    #       # "gnome"
+    #     ];
+    #     "org.freedesktop.portal.FileChooser" = [ "kde" ];
+    #     "org.freedesktop.portal.OpenURI" = [ "kde" ];
+    #   };
+    #   hyprland = {
+    #     default = [
+    #       "hyprland"
+    #       "gtk"
+    #       # "gnome"
+    #       "termfilechooser"
+    #     ];
+    #     "org.freedesktop.portal.FileChooser" = [ "termfilechooser" ];
+    #     "org.freedesktop.portal.OpenURI" = [ "termfilechooser" ];
+    #   };
+    # };
     wlr.enable = true;
-    configPackages = with pkgs; [
-      # xdg-desktop-portal
+    # configPackages = with pkgs; [
+    #   # xdg-desktop-portal
+    #   kdePackages.xdg-desktop-portal-kde
+    #   xdg-desktop-portal-gtk
+    #   xdg-desktop-portal-hyprland
+    #   xdg-desktop-portal-termfilechooser
+    # ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal
       kdePackages.xdg-desktop-portal-kde
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-    ];
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
       # xdg-desktop-portal-hyprland
-      xdg-desktop-portal-termfilechooser
     ];
     # make xdg-open use a portal
-    xdgOpenUsePortal = true;
+    xdgOpenUsePortal = false;
   };
 
   # Enable dconf for home-manager
@@ -321,8 +323,17 @@
     morewaita-icon-theme
 
     # Cloudflare
-    cloudflare-warp # cloudflared - moved to module
+    # cloudflare-warp # cloudflared - moved to module
+
+    # Portals (todo: move to module)
+    xdg-desktop-portal
+    kdePackages.xdg-desktop-portal-kde
+    xdg-desktop-portal-gtk
+    # xdg-desktop-portal-hyprland
   ];
+
+  # Cloudflare
+  services.cloudflare-warp.enable = true;
 
   # virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd = {

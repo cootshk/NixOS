@@ -45,6 +45,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    xlibre-overlay = {
+      url = "git+https://codeberg.org/takagemacoed/xlibre-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -53,6 +57,7 @@
       nixpkgs,
       catppuccin,
       sops-nix,
+      xlibre-overlay,
       ...
     }@inputs:
     let
@@ -96,6 +101,10 @@
             #catppuccin.homeManagerModules.catppuccin
             catppuccin.nixosModules.catppuccin
             sops-nix.nixosModules.sops
+            # Xlibre
+            xlibre-overlay.nixosModules.overlay-xlibre-xserver
+            inputs.xlibre-overlay.nixosModules.overlay-all-xlibre-drivers
+            xlibre-overlay.nixosModules.nvidia-ignore-ABI
           ];
         };
       };
