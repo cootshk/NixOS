@@ -14,7 +14,7 @@
 
 # Install
 > [!Note]
-> <p>Default locale and timezone is British.<br>
+> <p>Default locale and timezone is American.<br>
 > If you want to change this then edit the variables in flake.nix.</p>
 
 Make sure to reboot after installing with any of the methods below.

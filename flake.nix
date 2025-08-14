@@ -1,4 +1,7 @@
-{
+let
+  XLibre = false; # CHANGE
+in
+rec {
   description = "A simple flake for an atomic system";
 
   inputs = {
@@ -11,7 +14,7 @@
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
       submodules = true;
-      rev = "25aec3ac8ce65ed224f025f8f6dfef73780577a4";
+      # rev = "25aec3ac8ce65ed224f025f8f6dfef73780577a4";
       # ref = "v0.40.0";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -45,11 +48,18 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    xlibre-overlay = {
-      url = "git+https://codeberg.org/takagemacoed/xlibre-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
+  }
+  // xlibre;
+  xlibre =
+    if XLibre then
+      {
+        xlibre-overlay = {
+          url = "git+https://codeberg.org/takagemacoed/xlibre-overlay";
+          inputs.nixpkgs.follows = "nixpkgs";
+        };
+      }
+    else
+      { };
 
   outputs =
     {
@@ -57,7 +67,6 @@
       nixpkgs,
       catppuccin,
       sops-nix,
-      xlibre-overlay,
       ...
     }@inputs:
     let
@@ -73,6 +82,16 @@
       ];
 
       lib = nixpkgs.lib;
+      xlibre =
+        if XLibre then
+          [
+            inputs.xlibre-overlay.nixosModules.overlay-xlibre-xserver
+            inputs.xlibre-overlay.nixosModules.overlay-all-xlibre-drivers
+            inputs.xlibre-overlay.nixosModules.nvidia-ignore-ABI
+
+          ]
+        else
+          [ ];
     in
     {
       nixosConfigurations = {
@@ -101,11 +120,9 @@
             #catppuccin.homeManagerModules.catppuccin
             catppuccin.nixosModules.catppuccin
             sops-nix.nixosModules.sops
-            # Xlibre
-            xlibre-overlay.nixosModules.overlay-xlibre-xserver
-            inputs.xlibre-overlay.nixosModules.overlay-all-xlibre-drivers
-            xlibre-overlay.nixosModules.nvidia-ignore-ABI
-          ];
+          ]
+          # Xlibre
+          ++ xlibre;
         };
       };
 
