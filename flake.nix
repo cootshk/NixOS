@@ -1,9 +1,5 @@
-let
-  XLibre = false; # CHANGE
-in
-rec {
+{
   description = "A simple flake for an atomic system";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin.url = "github:catppuccin/nix";
@@ -48,18 +44,11 @@ rec {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  }
-  // xlibre;
-  xlibre =
-    if XLibre then
-      {
-        xlibre-overlay = {
-          url = "git+https://codeberg.org/takagemacoed/xlibre-overlay";
-          inputs.nixpkgs.follows = "nixpkgs";
-        };
-      }
-    else
-      { };
+    xlibre-overlay = {
+      url = "git+https://codeberg.org/takagemacoed/xlibre-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
   outputs =
     {
@@ -82,8 +71,9 @@ rec {
       ];
 
       lib = nixpkgs.lib;
+      enable_Xlibre = false; # CHANGE
       xlibre =
-        if XLibre then
+        if enable_Xlibre then
           [
             inputs.xlibre-overlay.nixosModules.overlay-xlibre-xserver
             inputs.xlibre-overlay.nixosModules.overlay-all-xlibre-drivers
