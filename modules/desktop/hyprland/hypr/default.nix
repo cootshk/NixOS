@@ -42,6 +42,9 @@
         wlsunset
         # wl-clipboard
       ];
+      services = {
+        swww.enable = true;
+      };
 
       home.file.".config/hypr/scripts" = {
         source = ./scripts;
