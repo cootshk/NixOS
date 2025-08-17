@@ -1,7 +1,8 @@
 {
   username,
   ...
-}: {
+}:
+{
   home-manager.users.${username} = _: {
     programs.waybar = {
       enable = true;
@@ -70,14 +71,14 @@
 
         /* This section can be use if you want to separate waybar modules */
         .modules-left, .modules-center, .modules-right {
-        	background: @theme_base_color;
+        	background: @surface0;
+          color: @text;
          	border: 0.5px solid @overlay0;
         	padding-top: 2px;
         	padding-bottom: 2px;
         	padding-right: 4px;
         	padding-left: 4px;
         	border-radius: 10px;
-
         }
 
         .modules-left, .modules-right {
@@ -159,7 +160,7 @@
 
         #battery.critical:not(.charging) {
           background-color: @red;
-          color: @theme_text_color;
+          color: @text;
           animation-name: blink;
           animation-duration: 0.5s;
           animation-timing-function: linear;
@@ -214,7 +215,8 @@
 
         #workspaces button {
             box-shadow: none;
-        	text-shadow: none;
+        	  text-shadow: none;
+            color: @text;
             padding: 0px;
             border-radius: 9px;
             padding-left: 4px;
@@ -385,15 +387,40 @@
           "margin-right" = 8;
 
           # "modules-left" = ["hyprland/workspaces" "mpris" "custom/r_end"];
-          "modules-left" = ["hyprland/workspaces" "cava" "custom/r_end"];
-          "modules-center" = ["custom/l_end" "idle_inhibitor" "clock" "custom/r_end"];
-          "modules-right" = ["custom/l_end" "cpu" "memory" "keyboard-state" "network" "bluetooth" "pulseaudio" "custom/r_end" "custom/r_end" "tray""custom/l_end" "custom/power" "custom/padd"];
+          "modules-left" = [
+            "hyprland/workspaces"
+            "cava"
+            "custom/r_end"
+          ];
+          "modules-center" = [
+            "custom/l_end"
+            "idle_inhibitor"
+            "clock"
+            "custom/r_end"
+          ];
+          "modules-right" = [
+            "custom/l_end"
+            "cpu"
+            "memory"
+            "keyboard-state"
+            "network"
+            "bluetooth"
+            "pulseaudio"
+            "custom/r_end"
+            "custom/r_end"
+            "tray"
+            "custom/l_end"
+            "custom/power"
+            "custom/padd"
+          ];
           #"modules-right" = ["custom/l_end" "temperature" "cpu" "memory" "keyboard-state" "network" "bluetooth" "pulseaudio" "custom/r_end" "hyprland/language" "custom/r_end" "tray" "battery" "custom/l_end" "custom/power" "custom/r_end" "custom/padd" ];
           "custom/colour-temperature" = {
             "format" = "{} ";
             "exec" = "wl-gammarelay-rs watch {t}";
-            "on-scroll-up" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100";
-            "on-scroll-down" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100";
+            "on-scroll-up" =
+              "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100";
+            "on-scroll-down" =
+              "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100";
           };
           "custom/cava_mviz" = {
             # DEPRECATED Use builtin cava module instead.
@@ -404,7 +431,16 @@
             "hide_on_silence" = false;
             "framerate" = 30;
             "bars" = 10;
-            "format-icons" = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+            "format-icons" = [
+              "▁"
+              "▂"
+              "▃"
+              "▄"
+              "▅"
+              "▆"
+              "▇"
+              "█"
+            ];
             "input_delay" = 1;
             # "noise_reduction" = 0.77;
             "sleep_timer" = 5;
@@ -444,7 +480,10 @@
               "paused" = "⏸";
               "playing" = "";
             };
-            "ignored-players" = ["firefox" "chromium"];
+            "ignored-players" = [
+              "firefox"
+              "chromium"
+            ];
             "max-length" = 30;
           };
           "temperature" = {
@@ -453,7 +492,11 @@
             "critical-threshold" = 80;
             # "format-critical" = "{temperatureC}°C {icon}";
             "format" = "{icon} {temperatureC}°C";
-            "format-icons" = ["" "" ""];
+            "format-icons" = [
+              ""
+              ""
+              ""
+            ];
             "interval" = 2;
           };
           "hyprland/language" = {
@@ -466,8 +509,30 @@
             "active-only" = false;
             "on-click" = "activate";
             "persistent-workspaces" = {
-              "HDMI-A-1" = [1 2 3 4 5 6 7 8 9 10];
-              "HDMI-A-2" = [1 2 3 4 5 6 7 8 9 10];
+              "HDMI-A-1" = [
+                1
+                2
+                3
+                4
+                5
+                6
+                7
+                8
+                9
+                10
+              ];
+              "HDMI-A-2" = [
+                1
+                2
+                3
+                4
+                5
+                6
+                7
+                8
+                9
+                10
+              ];
             };
           };
 
@@ -524,7 +589,16 @@
             "interval" = 10;
             "format" = "󰍛 {usage}%";
             "format-alt" = "{icon0}{icon1}{icon2}{icon3}";
-            "format-icons" = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+            "format-icons" = [
+              "▁"
+              "▂"
+              "▃"
+              "▄"
+              "▅"
+              "▆"
+              "▇"
+              "█"
+            ];
           };
 
           "memory" = {
@@ -539,7 +613,17 @@
           "backlight" = {
             "device" = "intel_backlight";
             "format" = "{icon} {percent}%";
-            "format-icons" = ["" "" "" "" "" "" "" "" ""];
+            "format-icons" = [
+              ""
+              ""
+              ""
+              ""
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
             "on-scroll-up" = "brightnessctl set 1%+";
             "on-scroll-down" = "brightnessctl set 1%-";
             "min-length" = 6;
@@ -578,7 +662,11 @@
               "phone" = "";
               "portable" = "";
               "car" = "";
-              "default" = ["" "" ""];
+              "default" = [
+                ""
+                ""
+                ""
+              ];
             };
           };
 
@@ -606,7 +694,19 @@
             "format-charging" = " {capacity}%";
             "format-plugged" = " {capacity}%";
             "format-alt" = "{time} {icon}";
-            "format-icons" = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+            "format-icons" = [
+              "󰂎"
+              "󰁺"
+              "󰁻"
+              "󰁼"
+              "󰁽"
+              "󰁾"
+              "󰁿"
+              "󰂀"
+              "󰂁"
+              "󰂂"
+              "󰁹"
+            ];
           };
 
           "custom/power" = {

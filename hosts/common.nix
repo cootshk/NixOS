@@ -3,6 +3,7 @@
   pkgs,
   username,
   lib,
+  config,
   ...
 }:
 {

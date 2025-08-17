@@ -166,7 +166,7 @@
               mouse_move_focuses_monitor = true
               vfr = 1 # always keep on
               vrr = 1 # enable variable refresh rate (effective depending on hardware)
-              no_direct_scanout = false; # Set to false for improved Fullscreen performance.
+              # no_direct_scanout = false; # Set to false for improved Fullscreen performance.
           }
 
           animations {
@@ -197,7 +197,7 @@
 
           decoration {
               rounding = 10
-              drop_shadow = false
+              # drop_shadow = false
               dim_special = 0.3
               blur {
                   enabled = yes
@@ -216,7 +216,7 @@
           }
 
           master {
-              new_is_master = yes
+              # new_is_master = yes
               new_on_top=1
               mfact = 0.5
           }
