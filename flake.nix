@@ -48,6 +48,10 @@
       url = "git+https://codeberg.org/takagemacoed/xlibre-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    git-blame-someone-else = {
+      url = "github:cootshk/git-blame-someone-else";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -100,9 +104,16 @@
             (
               { pkgs, ... }:
               {
-                nixpkgs.config = {
-                  allowUnfree = true;
-                  allowUnfreePredicate = pkg: true;
+                nixpkgs = {
+                  config = {
+                    allowUnfree = true;
+                    allowUnfreePredicate = pkg: true;
+                  };
+                  overlays = [
+                    (final: prev: {
+                      git-blame-someone-else = inputs.git-blame-someone-else.packages.${system}.default;
+                    })
+                  ];
                 };
               }
             )

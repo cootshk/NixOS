@@ -291,6 +291,7 @@
     devbox # faster nix-shells
     shellify # faster nix-shells
     github-desktop
+    git-blame-someone-else
     /*
       (pkgs.catppuccin-sddm.override {
         flavor = "mocha";
