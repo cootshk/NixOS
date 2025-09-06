@@ -215,19 +215,19 @@
   # Setup auth agent and keyring
   services.gnome.gnome-keyring.enable = true;
   systemd = {
-    user.services.polkit-kde-authentication-agent-1 = {
-      description = "polkit-kde-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
+    # user.services.polkit-kde-authentication-agent-1 = {
+    #   description = "polkit-kde-authentication-agent-1";
+    #   wantedBy = [ "graphical-session.target" ];
+    #   wants = [ "graphical-session.target" ];
+    #   after = [ "graphical-session.target" ];
+    #   serviceConfig = {
+    #     Type = "simple";
+    #     ExecStart = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+    #     Restart = "on-failure";
+    #     RestartSec = 1;
+    #     TimeoutStopSec = 10;
+    #   };
+    # };
   };
 
   # Enable CUPS to print documents.
@@ -285,7 +285,7 @@
     bibata-cursors
     libsForQt5.qt5.qtgraphicaleffects # For sddm to function properly
     polkit
-    libsForQt5.polkit-kde-agent
+    # libsForQt5.polkit-kde-agent
 
     # Development
     devbox # faster nix-shells
@@ -332,6 +332,8 @@
     kdePackages.xdg-desktop-portal-kde
     xdg-desktop-portal-gtk
     # xdg-desktop-portal-hyprland
+
+    nvtopPackages.full
   ];
 
   # Cloudflare
