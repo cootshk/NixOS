@@ -75,12 +75,12 @@
       ];
 
       lib = nixpkgs.lib;
-      enable_Xlibre = false; # CHANGE
+      enable_Xlibre = true; # CHANGE
       xlibre =
         if enable_Xlibre then
           [
             inputs.xlibre-overlay.nixosModules.overlay-xlibre-xserver
-            inputs.xlibre-overlay.nixosModules.overlay-all-xlibre-drivers
+            # inputs.xlibre-overlay.nixosModules.overlay-all-xlibre-drivers
             inputs.xlibre-overlay.nixosModules.nvidia-ignore-ABI
 
           ]
