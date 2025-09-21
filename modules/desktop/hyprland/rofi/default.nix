@@ -2,11 +2,12 @@
   pkgs,
   username,
   ...
-}: {
+}:
+{
   home-manager.users.${username} = _: {
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
+      package = pkgs.rofi;
       terminal = "${pkgs.alacritty}/bin/alacritty";
     };
     home.file.".config/rofi/config-music.rasi".source = ./config-music.rasi;
