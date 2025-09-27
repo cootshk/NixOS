@@ -334,6 +334,9 @@
     # xdg-desktop-portal-hyprland
 
     nvtopPackages.full
+
+    # smartd
+    smartmontools
   ];
 
   # Cloudflare
@@ -382,6 +385,12 @@
   };
 
   # List services that you want to enable:
+
+  # smartd for disks
+  services.smartd = {
+    enable = true;
+    autodetect = true;
+  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
