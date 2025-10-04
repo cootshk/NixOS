@@ -58,6 +58,9 @@
         # Applications
         cider-2
         #kate
+        prismlauncher
+        vesktop
+        vlc
         xfce.thunar
 
         # Terminal
@@ -84,8 +87,6 @@
         ripgrep
         piper-tts
         portaudio
-        prismlauncher
-        vlc
         tldr
         unzip
       ];

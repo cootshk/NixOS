@@ -47,6 +47,7 @@
         enable = true;
         flavor = "mocha";
       };
+      catppuccin.vesktop.enable = false; # CSS is done from inside Vesktop
       qt = {
         enable = true;
         platformTheme.name = "kvantum";
