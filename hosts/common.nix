@@ -56,6 +56,7 @@
       # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
       home.packages = with pkgs; [
         # Applications
+        cider-2
         #kate
         xfce.thunar
 
