@@ -109,6 +109,9 @@
 
   # Bootloader.
   boot = {
+    extraModprobeConfig = ''
+      options usbcore use_both_schemes=y
+    '';
     tmp.cleanOnBoot = true;
     kernelParams = [ "intel_iommu=on" ];
     loader = {
