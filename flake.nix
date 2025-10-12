@@ -33,12 +33,6 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Wallpaper Engine
-    kostek001-pkgs = {
-      url = "github:kostek001/pkgs";
-      # Only if using nixpkgs-unstable
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # sops
     sops-nix = {
       url = "github:Mic92/sops-nix";

@@ -56,8 +56,11 @@
       # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
       home.packages = with pkgs; [
         # Applications
+        archipelago
         cider-2
         #kate
+        owmods-cli
+        owmods-gui
         prismlauncher
         vesktop
         vlc
@@ -276,6 +279,10 @@
     overlays = [ inputs.nur.overlays.default ];
   };
 
+  environment.sessionVariables = {
+    __NV_DISABLE_EXPLICIT_SYNC = "1";
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -320,7 +327,7 @@
     (wineWowPackages.stable.override { waylandSupport = true; })
 
     # Wallpaper Engine
-    inputs.kostek001-pkgs.packages.${pkgs.system}.wallpaper-engine-kde-plugin
+    kdePackages.wallpaper-engine-plugin
     kdePackages.qtwebchannel
 
     # Icons
