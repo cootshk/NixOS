@@ -304,6 +304,8 @@
     shellify # faster nix-shells
     github-desktop
     git-blame-someone-else
+    freerdp3
+    winboat
     /*
       (pkgs.catppuccin-sddm.override {
         flavor = "mocha";

@@ -46,6 +46,7 @@
       url = "github:cootshk/git-blame-someone-else";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    winboat.url = "github:tibixdev/winboat";
   };
 
   outputs =
@@ -103,11 +104,33 @@
                     allowUnfree = true;
                     allowUnfreePredicate = pkg: true;
                   };
-                  overlays = [
-                    (final: prev: {
-                      git-blame-someone-else = inputs.git-blame-someone-else.packages.${system}.default;
-                    })
-                  ];
+                  overlays =
+                    let
+                      overlayed = [
+                        # All overlays listed here have their `default` package added to nixpkgs as the overlay name
+                        # For example: `git-blame-someone-else` overlay adds inputs.git-blame-someone-else.packages.${system}.default as `git-blame-someone-else` in the overlayed nixpkgs
+                        "git-blame-someone-else"
+                        "winboat"
+                      ];
+                    in
+                    [
+                      (
+                        final: prev:
+                        with lib.attrsets;
+                        genAttrs overlayed (
+                          overlay:
+                          let
+                            set = inputs.${overlay}.packages.${system};
+                          in
+                          if hasAttr "defaultPackage" inputs.${overlay} then
+                            inputs.${overlay}.defaultPackage.${system}
+                          else if hasAttr "default" set then
+                            set.default
+                          else
+                            set.${overlay}
+                        )
+                      )
+                    ];
                 };
               }
             )
