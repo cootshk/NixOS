@@ -46,7 +46,6 @@
       url = "github:cootshk/git-blame-someone-else";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    winboat.url = "github:tibixdev/winboat";
   };
 
   outputs =
@@ -110,7 +109,6 @@
                         # All overlays listed here have their `default` package added to nixpkgs as the overlay name
                         # For example: `git-blame-someone-else` overlay adds inputs.git-blame-someone-else.packages.${system}.default as `git-blame-someone-else` in the overlayed nixpkgs
                         "git-blame-someone-else"
-                        "winboat"
                       ];
                     in
                     [

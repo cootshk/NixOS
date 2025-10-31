@@ -86,7 +86,7 @@
         neofetch
         # nvtop
         #nvidia-docker
-        ollama-cuda
+        # ollama-cuda
         ripgrep
         piper-tts
         portaudio
@@ -251,11 +251,9 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    jack.enable = true;
+    # media-session has been replaced by wireplumber
+    wireplumber.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -304,7 +302,7 @@
     shellify # faster nix-shells
     github-desktop
     git-blame-someone-else
-    freerdp3
+    freerdp
     winboat
     /*
       (pkgs.catppuccin-sddm.override {
@@ -319,7 +317,7 @@
     pciutils
     wayland-utils
     clinfo
-    glxinfo
+    mesa-demos
     vulkan-tools
 
     # VMs
@@ -332,7 +330,7 @@
     (wineWowPackages.stable.override { waylandSupport = true; })
 
     # Wallpaper Engine
-    kdePackages.wallpaper-engine-plugin
+    # kdePackages.wallpaper-engine-plugin
     kdePackages.qtwebchannel
 
     # Icons
@@ -347,7 +345,7 @@
     xdg-desktop-portal-gtk
     # xdg-desktop-portal-hyprland
 
-    nvtopPackages.full
+    # nvtopPackages.full
 
     # smartd
     smartmontools
