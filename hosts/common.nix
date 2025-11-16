@@ -26,6 +26,7 @@
     ../modules/programs/firefox
     # ../modules/programs/firefox/firefox-system.nix
     ../modules/programs/flatpak
+    ../modules/programs/jetbrains
     ../modules/programs/kitty
     ../modules/programs/lazygit
     ../modules/programs/lf
