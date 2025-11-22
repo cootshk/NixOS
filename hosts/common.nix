@@ -304,7 +304,8 @@
     github-desktop
     git-blame-someone-else
     freerdp
-    winboat
+    # TODO: remove this once winboat is fixed in nixpkgs
+    # (winboat.override { nodejs_24 = nodejs_24; })
     /*
       (pkgs.catppuccin-sddm.override {
         flavor = "mocha";

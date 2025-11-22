@@ -69,7 +69,7 @@
       ];
 
       lib = nixpkgs.lib;
-      enable_Xlibre = true; # CHANGE
+      enable_Xlibre = false; # CHANGE
       xlibre =
         if enable_Xlibre then
           [
