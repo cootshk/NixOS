@@ -5,30 +5,10 @@
     catppuccin.url = "github:catppuccin/nix";
     nur.url = "github:nix-community/NUR";
     nixvim.url = "github:Sly-Harvey/nixvim";
-    # hyprland.url = "github:hyprwm/Hyprland";
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/Hyprland";
-      submodules = true;
-      # rev = "25aec3ac8ce65ed224f025f8f6dfef73780577a4";
-      # ref = "v0.40.0";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
-    Hyprspace = {
-      type = "git";
-      url = "https://github.com/KZDKM/Hyprspace";
-      submodules = true;
-      inputs.hyprland.follows = "hyprland";
-      # rev = "cbdac93d2a2b2cb70933a8f6a51ae7511de35615";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # spicetify-nix = {
-    #   url = "github:the-argus/spicetify-nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -11,7 +11,6 @@
     ../common.nix
     ../../modules/hardware/nvidia.nix
     ../../modules/hardware/opengl.nix
-    ../../modules/desktop/hyprland # Enable Hyprland window manager
     ../../modules/desktop/plasma
     #Plasma 6
     #../../modules/desktop/plasma6.nix
