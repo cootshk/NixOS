@@ -38,6 +38,7 @@
     ../modules/programs/vscodium
     ../modules/programs/steam
     # ../modules/programs/spicetify
+    ../modules/programs/unity
     ../modules/programs/waydroid
     ../modules/programs/zsh
   ];
