@@ -176,43 +176,48 @@
 
   xdg.portal = {
     enable = true;
-    # config = {
-    #   common.default = [ "*" ];
-    #   kde = {
-    #     default = [
-    #       "kde"
-    #       "gtk"
-    #       # "gnome"
-    #     ];
-    #     "org.freedesktop.portal.FileChooser" = [ "kde" ];
-    #     "org.freedesktop.portal.OpenURI" = [ "kde" ];
-    #   };
-    #   hyprland = {
-    #     default = [
-    #       "hyprland"
-    #       "gtk"
-    #       # "gnome"
-    #       "termfilechooser"
-    #     ];
-    #     "org.freedesktop.portal.FileChooser" = [ "termfilechooser" ];
-    #     "org.freedesktop.portal.OpenURI" = [ "termfilechooser" ];
-    #   };
-    # };
+    config = {
+      common.default = [ "gtk;*" ];
+      kde = {
+        default = [
+          "kde"
+          "gtk"
+          "wlr"
+          # "gnome"
+        ];
+        "org.freedesktop.portal.FileChooser" = [ "kde" ];
+        "org.freedesktop.portal.OpenURI" = [ "kde" ];
+      };
+      hyprland = {
+        default = [
+          "hyprland"
+          "wlr"
+          "gtk"
+          # "gnome"
+          "termfilechooser"
+        ];
+        "org.freedesktop.portal.FileChooser" = [ "termfilechooser" ];
+        "org.freedesktop.portal.OpenURI" = [ "termfilechooser" ];
+      };
+    };
     wlr.enable = true;
-    # configPackages = with pkgs; [
-    #   # xdg-desktop-portal
-    #   kdePackages.xdg-desktop-portal-kde
-    #   xdg-desktop-portal-gtk
-    #   xdg-desktop-portal-hyprland
-    #   xdg-desktop-portal-termfilechooser
-    # ];
+    configPackages = with pkgs; [
+      xdg-desktop-portal
+      kdePackages.xdg-desktop-portal-kde
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-termfilechooser
+    ];
     extraPortals = with pkgs; [
       xdg-desktop-portal
       kdePackages.xdg-desktop-portal-kde
+      xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
       # xdg-desktop-portal-hyprland
+      xdg-desktop-portal-termfilechooser
     ];
-    # make xdg-open use a portal
+    #   # make xdg-open use a portal
     xdgOpenUsePortal = false;
   };
 
@@ -297,6 +302,7 @@
     bibata-cursors
     libsForQt5.qt5.qtgraphicaleffects # For sddm to function properly
     polkit
+    kdePackages.qtbase
     # libsForQt5.polkit-kde-agent
 
     # Development

@@ -13,7 +13,7 @@
     enable = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    withUWSM = true;
+    # withUWSM = true;
   };
 
   home-manager.users.${username} =
