@@ -5,6 +5,8 @@
     with jetbrains;
     [
       idea-ultimate
+      # Minecraft
+      glfw
       clion
       pycharm-professional
       webstorm
