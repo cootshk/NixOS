@@ -283,6 +283,7 @@
     libsForQt5.qt5.qtgraphicaleffects # For sddm to function properly
     polkit
     kdePackages.qtbase
+    kdotool
     # libsForQt5.polkit-kde-agent
 
     # Development
