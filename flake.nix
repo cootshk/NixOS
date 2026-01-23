@@ -77,6 +77,11 @@
           modules = [
             (
               { pkgs, ... }:
+              let
+                overlayFiles = [
+                  (import modules/overlays/vesktop.nix)
+                ];
+              in
               {
                 nixpkgs = {
                   config = {
@@ -91,7 +96,8 @@
                         "git-blame-someone-else"
                       ];
                     in
-                    [
+                    overlayFiles
+                    ++ [
                       (
                         final: prev:
                         with lib.attrsets;

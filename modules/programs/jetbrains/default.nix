@@ -17,6 +17,7 @@
       pkgs.jetbrains-runner
       # Java
       corretto21
+      zulu25
       # gradle_9
       maven
     ];

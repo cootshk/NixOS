@@ -79,6 +79,7 @@
         fish
         git
         gh
+        gum
         htop
         jq
         lf
@@ -293,6 +294,7 @@
     git-blame-someone-else
     freerdp
     # TODO: remove this once winboat is fixed in nixpkgs
+    winboat
     # (winboat.override { nodejs_24 = nodejs_24; })
     /*
       (pkgs.catppuccin-sddm.override {
