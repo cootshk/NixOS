@@ -4,7 +4,24 @@
   ...
 }:
 {
-  catppuccin.flavor = "mocha";
+  catppuccin = {
+    accent = "teal";
+    flavor = "mocha";
+    enable = true;
+    cache = true;
+    cursors = {
+      enable = true;
+      flavor = "mocha";
+      accent = "dark";
+    };
+    grub = {
+      enable = true;
+    };
+    gtk.icon.enable = true;
+    sddm.enable = true;
+    tty.enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
     libsForQt5.qt5ct
     kdePackages.qt6ct

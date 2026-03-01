@@ -66,7 +66,7 @@
         prismlauncher
         vesktop
         vlc
-        xfce.thunar
+        thunar
 
         # Terminal
         appimage-run
@@ -114,6 +114,7 @@
   boot = {
     extraModprobeConfig = ''
       options usbcore use_both_schemes=y
+      options hid_apple fnmode=2
     '';
     tmp.cleanOnBoot = true;
     kernelParams = [ "intel_iommu=on" ];
@@ -257,12 +258,19 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
-  fonts.fontDir.enable = true;
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.fira-code
-    # ...
-  ]; # ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts = {
+    fontDir.enable = true;
+    enableDefaultPackages = true;
+    packages =
+      with pkgs;
+      [
+        wineWow64Packages.fonts
+        # ...
+      ]
+      # Nerd Fonts
+      ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+
+  };
 
   nixpkgs = {
     overlays = [ inputs.nur.overlays.default ];
@@ -319,10 +327,10 @@
     # virt-manager
 
     # Wine
-    (wineWowPackages.stable.override { waylandSupport = true; })
+    wineWow64Packages.stable
+    wineWow64Packages.fonts
 
     # Wallpaper Engine
-    # kdePackages.wallpaper-engine-plugin
     kdePackages.qtwebchannel
 
     # Icons
