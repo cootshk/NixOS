@@ -4,11 +4,11 @@
     with pkgs;
     with jetbrains;
     [
-      idea-ultimate
+      idea
       # Minecraft
       glfw
       clion
-      pycharm-professional
+      pycharm
       webstorm
       goland
       datagrip
@@ -16,8 +16,11 @@
       phpstorm
       pkgs.jetbrains-runner
       # Java
+      zulu17
       corretto21
       zulu25
+      gradle
+      gradle_9
       # gradle_9
       maven
     ];
