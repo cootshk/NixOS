@@ -23,8 +23,6 @@
     ../modules/programs/direnv
     ../modules/programs/docker
     #../modules/programs/fastfetch
-    ../modules/programs/firefox
-    # ../modules/programs/firefox/firefox-system.nix
     ../modules/programs/flatpak
     ../modules/programs/jetbrains
     ../modules/programs/kitty

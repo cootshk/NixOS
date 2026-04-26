@@ -25,6 +25,7 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
