@@ -80,6 +80,7 @@
         gum
         htop
         jq
+        kubernetes-helm
         lf
         #lolcat
         nixfmt

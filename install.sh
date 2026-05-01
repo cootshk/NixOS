@@ -34,5 +34,5 @@ sed -i -e 's/username = \".*\"/username = \"'$currentUser'\"/' $scriptdir/flake.
 nix-shell --command "git -C $scriptdir add *"
 clear
 nix-shell --command "echo BUILDING! | figlet -cklnoW | lolcat -F 0.3 -p 2.5 -S 300"
-nix-shell --command "sudo nixos-rebuild switch --flake $scriptdir#nixos --show-trace --upgrade $@" # && rm -rf $backupdir"
+nix-shell --command "sudo nixos-rebuild switch --flake $scriptdir#nixos --show-trace $@" # && rm -rf $backupdir"
 # echo "$backupdir"
