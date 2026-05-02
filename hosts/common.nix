@@ -58,6 +58,7 @@
         # Applications
         archipelago
         cider-2
+        dolphin-emu
         #kate
         owmods-cli
         owmods-gui
@@ -68,7 +69,6 @@
 
         # Terminal
         appimage-run
-        # dolphin-emu
         eza
         fzf
         fastfetch
@@ -269,6 +269,7 @@
         noto-fonts-color-emoji
         dejavu_fonts
         liberation_ttf
+        adwaita-fonts
         # ...
       ]
       # Nerd Fonts
@@ -305,6 +306,8 @@
     github-desktop
     git-blame-someone-else
     freerdp
+    kubectl
+    dnslookup
     # TODO: remove this once winboat is fixed in nixpkgs
     # winboat
     # (winboat.override { nodejs_24 = nodejs_24; })
