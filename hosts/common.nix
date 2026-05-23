@@ -301,6 +301,7 @@
     # libsForQt5.polkit-kde-agent
 
     # Development
+    claude-code
     devbox # faster nix-shells
     shellify # faster nix-shells
     github-desktop

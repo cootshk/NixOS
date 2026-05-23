@@ -1,7 +1,9 @@
-{ username
-, pkgs
-, ...
-}: {
+{
+  username,
+  pkgs,
+  ...
+}:
+{
   environment.systemPackages = with pkgs; [
     # vscodium
     lua-language-server
@@ -29,7 +31,7 @@
           # ms-vscode.cmake-tools
           # ms-vscode.makefile-tools
           # ms-dotnettools.csharp
-          ms-python.python
+          # ms-python.python # FIXME: broken
           # pkief.material-icon-theme
           # equinusocio.vsc-material-theme
           # dracula-theme.theme-dracula
@@ -102,7 +104,7 @@
           "C_Cpp.intelliSenseCacheSize" = 2048;
           "C_Cpp.intelliSenseMemoryLimit" = 2048;
           "C_Cpp.default.browse.path" = [
-            ''''${workspaceFolder}/**''
+            "\${workspaceFolder}/**"
           ];
           "C_Cpp.default.cStandard" = "gnu11";
           "C_Cpp.inlayHints.parameterNames.hideLeadingUnderscores" = false;
