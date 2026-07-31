@@ -1,3 +1,13 @@
+# Archived
+
+I no longer use NixOS on my desktop.
+
+btw, I use artix.
+
+<hr>
+
+
+
 <h1 align="center">
    <img src="./assets/nixos-logo.png  " width="100px" /> 
    <br>
